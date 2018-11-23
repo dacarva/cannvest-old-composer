@@ -159,6 +159,21 @@ transaction MoistureReading extends ProductLotTransaction {
 transaction ProductLotReceived extends ProductLotTransaction {
 }
 
+/**
+ * An IPFS File Transaction reading
+ */
+transaction IpfsFileReading extends ProductLotTransaction {
+  o String ipfsFile // Identified by Hash
+}
+
+/**
+ * An Process note as a String Transaction reading
+ */
+transaction ProcessNoteReading extends ProductLotTransaction {
+  o String processNote // Identified by Hash
+}
+
+
 
 //-------------------ASSETS--------------------//
 
@@ -174,6 +189,8 @@ asset ProductLot identified by lotId {
   o RhReading[] rhReadings optional
   o LumenReading[] lumenReadings optional
   o MoistureReading[] moistureReadings optional
+  o IpfsFileReading[] ipfsFileReadings optional
+  o ProcessNoteReading[] processNoteReadings optional
   --> Contract contract
 }
 

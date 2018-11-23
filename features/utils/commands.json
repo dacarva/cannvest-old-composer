@@ -21,3 +21,13 @@
   "moisture":15,
   "lot": "org.agrotracker.network.ProductLot#LOT_001"
 }
+{
+  "$class": "org.agrotracker.network.IpfsFileReading",
+  "ipfsFile":"Qmxxxxxxxx",
+  "lot": "org.agrotracker.network.ProductLot#LOT_001"
+}
+{
+  "$class": "org.agrotracker.network.ProcessNoteReading",
+  "processNote":"Se le hizo una revisión manual del tallo",
+  "lot": "org.agrotracker.network.ProductLot#LOT_001"
+}

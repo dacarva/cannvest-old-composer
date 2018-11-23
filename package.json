@@ -3,7 +3,7 @@
     "composer": "^0.20.4"
   },
   "name": "agrotracker-network",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "A network to track controlled assets",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/agrotracker-network.bna",

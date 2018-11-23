@@ -59,19 +59,20 @@ abstract participant Business identified by participantId {
   o String email
   o String participantId 
   o Address address
-  o Double accountBalance optional
 }
 
 /**
  * A Producer is a type of participant in the network
  */
 participant Producer extends Business {
+  o Double accountBalance
 }
 
 /**
  * A Consumer is a type of participant in the network
  */
 participant Consumer extends Business {
+  o Double accountBalance
 }
 
 /**
@@ -152,14 +153,6 @@ transaction MoistureReading extends ProductLotTransaction {
 
 
 /**
- * A notification that a lot has been received by the
- * government and that funds should be transferred from the government
- * to the producer to pay for the lot.
- */
-transaction ProductLotReceived extends ProductLotTransaction {
-}
-
-/**
  * An IPFS File Transaction reading
  */
 transaction IpfsFileReading extends ProductLotTransaction {
@@ -171,6 +164,22 @@ transaction IpfsFileReading extends ProductLotTransaction {
  */
 transaction ProcessNoteReading extends ProductLotTransaction {
   o String processNote // Identified by Hash
+}
+
+/**
+ * A notification that a lot has been received by the
+ * consumer and that funds should be transferred from the consumer
+ * to the producer to pay for the lot.
+ */
+transaction ProductLotReceived extends ProductLotTransaction {
+}
+
+
+/**
+ * A notification that a license has been updated for a product lot
+ */
+transaction ProductLotLicenseUpdate extends ProductLotTransaction {
+  o Boolean licenseStatus
 }
 
 
@@ -185,6 +194,7 @@ asset ProductLot identified by lotId {
   o ProductType type
   o ProductLotStatus status
   o Long unitCount
+  o Boolean licenseStatus
   o TemperatureReading[] temperatureReadings optional
   o RhReading[] rhReadings optional
   o LumenReading[] lumenReadings optional
@@ -192,11 +202,12 @@ asset ProductLot identified by lotId {
   o IpfsFileReading[] ipfsFileReadings optional
   o ProcessNoteReading[] processNoteReadings optional
   --> Contract contract
+  --> LicenseContract licenseContract
+
 }
 
 /**
- * Defines a contract between a Producer and an Government to ship using
- * a Consumer, paying a set unit price. The unit price is multiplied by
+ * Defines a contract between a Producer and an Consumer to deliver paying a set unit price. The unit price is multiplied by
  * a penality factor proportional to the deviation from the min and max
  * negociated temperatures for the lot.
  */
@@ -204,13 +215,17 @@ asset Contract identified by contractId {
   o String contractId
   --> Producer producer
   --> Consumer consumer
-  // --> Government government
   o DateTime arrivalDateTime
   o Double unitPrice
   o Double minTemperature
   o Double maxTemperature
   o Double minPenaltyFactor
   o Double maxPenaltyFactor
+}
+
+asset LicenseContract identified by contractId {
+  o String contractId
+  --> Government government
 }
 
 

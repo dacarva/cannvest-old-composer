@@ -31,3 +31,13 @@
   "processNote":"Se le hizo una revisión manual del tallo",
   "lot": "org.agrotracker.network.ProductLot#LOT_001"
 }
+{
+  "$class": "org.agrotracker.network.ProductLotLicenseUpdate",
+  "licenseStatus": false,
+  "lot": "org.agrotracker.network.ProductLot#LOT_001"
+}
+{
+  composer network install -c PeerAdmin@hlfv1 -a agrotracker-network@0.0.24.bna,
+  composer network start -c PeerAdmin@hlfv1 -n agrotracker-network -l "ERROR" -A admin -S adminpw -f agrotracker-networkadmin.card -V 0.0.24,
+  composer-rest-server -c admin@agrotracker-network -n never -u true -d n
+}

@@ -38,6 +38,48 @@ enum ShipmentStatus {
 }
 
 /**
+ * A concept for a simple street address
+ */
+concept Address {
+  o String city optional
+  o String country
+  o String street optional
+  o String zip optional
+}
+
+//----------------PARTICIPANTS-------------------------//
+
+/**
+ * An abstract participant type in this business network
+ */
+abstract participant Business identified by participantId {
+  o String email
+  o String name
+  o String participantId //NIT , CC, Passport Etc
+  o Address address
+}
+
+/**
+ * A Government Entity is a type of participant in the network
+ */
+participant Government extends Business {
+}
+
+/**
+ * A Crop producer is a type of participant in the network
+ */
+participant Producer extends Business {
+}
+
+/**
+ * A Consumer Entity is a type of participant in the network
+ */
+participant Consumer extends Business {
+}
+
+//----------------TRANSACTIONS-------------------------//
+
+/**
  * An abstract transaction that is related to a plant Lot
  */
 abstract transaction PlantLotTransaction {
@@ -87,7 +129,7 @@ transaction PictureHash extends PlantLotTransaction {
  * A note written during the process. Manual Input
  */
 transaction ProcessNote extends PlantLotTransaction {
-  o String note // 
+  o String note // String
 }
 
 /**

@@ -46,3 +46,13 @@ rule NetworkAdminSystem {
     resource: "org.hyperledger.composer.system.**"
     action: ALLOW
 }
+
+
+
+rule TemperatureSensor_C_TemperatureReading {
+    description: "Grant IoT Temperature Sensor devices full access to the appropriate transactions"
+    participant: "org.agrotracker.network.TemperatureSensor"
+    operation: CREATE
+    resource: "org.agrotracker.network.TemperatureReading"
+    action: ALLOW
+}

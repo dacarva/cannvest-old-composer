@@ -13,27 +13,110 @@
  */
 
 /**
- * Write your model definitions here
+ * A business network for shipping perishable goods
+ * The cargo is temperature controlled and contracts
+ * can be negociated based on the temperature
+ * readings received for the cargo
  */
 
 namespace org.agrotracker.network
 
 /**
- * The type of perishable product being produced
+ * The type of perishable product being shipped
  */
 enum ProductType {
-  o CANNABIS
-  o COCA
-  o POPPY
+  o BANANAS
+  o APPLES
+  o PEARS
+  o PEACHES
+  o COFFEE
 }
 
 /**
- * The status of the production
+ * The status of a lot
  */
-enum ProductionStatus {
-  o PLANTED
-  o HARVESTED
-  o DELIVERED
+enum ProductLotStatus {
+  o CREATED
+  o IN_TRANSIT
+  o ARRIVED
+}
+
+/** 
+ * Directions of the compass 
+ */ 
+enum CompassDirection { 
+  o N 
+  o S 
+  o E 
+  o W 
+}
+
+/**
+ * An abstract transaction that is related to a ProductLot
+ */
+abstract transaction ProductLotTransaction {
+  --> ProductLot lot
+}
+
+/**
+ * An temperature reading for a lot. E.g. received from a
+ * device within a temperature controlled shipping container
+ */
+transaction TemperatureReading extends ProductLotTransaction {
+  o Double centigrade
+}
+
+/** 
+ * A GPS reading for a lot. E.g. received from a device 
+ * within a shipping container 
+ */ 
+transaction GpsReading extends ProductLotTransaction { 
+  o String readingTime 
+  o String readingDate 
+  o String latitude 
+  o CompassDirection latitudeDir 
+  o String longitude 
+  o CompassDirection longitudeDir 
+}
+
+/**
+ * A notification that a lot has been received by the
+ * importer and that funds should be transferred from the importer
+ * to the grower to pay for the lot.
+ */
+transaction ProductLotReceived extends ProductLotTransaction {
+}
+
+/**
+ * A lot being tracked as an asset on the ledger
+ */
+asset ProductLot identified by lotId {
+  o String lotId
+  o ProductType type
+  o ProductLotStatus status
+  o Long unitCount
+  o TemperatureReading[] temperatureReadings optional
+  o GpsReading[] gpsReadings optional
+  --> Contract contract
+}
+
+/**
+ * Defines a contract between a Grower and an Importer to ship using
+ * a Shipper, paying a set unit price. The unit price is multiplied by
+ * a penality factor proportional to the deviation from the min and max
+ * negociated temperatures for the lot.
+ */
+asset Contract identified by contractId {
+  o String contractId
+  --> Grower grower
+  --> Shipper shipper
+  --> Importer importer
+  o DateTime arrivalDateTime
+  o Double unitPrice
+  o Double minTemperature
+  o Double maxTemperature
+  o Double minPenaltyFactor
+  o Double maxPenaltyFactor
 }
 
 /**
@@ -46,34 +129,33 @@ concept Address {
   o String zip optional
 }
 
-//----------------PARTICIPANTS-------------------------//
-
 /**
  * An abstract participant type in this business network
  */
-abstract participant Business identified by participantId {
-  o String participantId //NIT , CC, Passport Etc
-  o Double accountBalance
+abstract participant Business identified by email {
+  o String email
   o Address address
+  o Double accountBalance
 }
 
 /**
- * A Government Entity is a type of participant in the network
+ * A Grower is a type of participant in the network
  */
-participant Government extends Business {
+participant Grower extends Business {
 }
 
 /**
- * A Crop producer is a type of participant in the network
+ * A Shipper is a type of participant in the network
  */
-participant Producer extends Business {
+participant Shipper extends Business {
 }
 
 /**
- * A Consumer Entity is a type of participant in the network
+ * An Importer is a type of participant in the network
  */
-participant Consumer extends Business {
+participant Importer extends Business {
 }
+
 /**
  * An IoTDevice is any device that is part of the network
  */
@@ -89,34 +171,25 @@ participant TemperatureSensor extends IoTDevice {
 
 
 
-
-
-
-
-
-
-//-----------------------------EXAMPLE ONLY -----------------------//
-
-
-participant SampleParticipant identified by participantId {
-  o String participantId
-  o String firstName
-  o String lastName
+/**
+ * An event - when the temperature goes outside the agreed-upon boundaries
+ */
+event TemperatureThresholdEvent {
+  o String message
+  o Double temperature
+  --> ProductLot lot
+}
+ 
+/**
+ * An event - when the ship arrives at the port
+ */
+event ProductLotInPortEvent {
+  o String message
+  --> ProductLot lot
 }
 
-asset SampleAsset identified by assetId {
-  o String assetId
-  --> SampleParticipant owner
-  o String value
-}
-
-transaction SampleTransaction {
-  --> SampleAsset asset
-  o String newValue
-}
-
-event SampleEvent {
-  --> SampleAsset asset
-  o String oldValue
-  o String newValue
+/**
+ * JUST FOR INITIALIZING A DEMO
+ */
+transaction SetupDemo {
 }

@@ -94,9 +94,21 @@ participant TemperatureSensor extends IoTDevice {
 }
 
 /**
- * An Relative Humidity temperature sensor
+ * An Relative Humidity sensor
  */
 participant RhSensor extends IoTDevice {
+}
+
+/**
+ * An Lumen sensor
+ */
+participant LumenSensor extends IoTDevice {
+}
+
+/**
+ * A Moisture sensor
+ */
+participant MoistureSensor extends IoTDevice {
 }
 
 //-------------------TRANSACTIONS--------------------//
@@ -124,6 +136,20 @@ transaction RhReading extends ProductLotTransaction {
   o Double humidity
 }
 
+/**
+ * An Lumen reading for a lot
+ */
+transaction LumenReading extends ProductLotTransaction {
+  o Double lumen
+}
+
+/**
+ * An Moisture reading for a lot
+ */
+transaction MoistureReading extends ProductLotTransaction {
+  o Double moisture
+}
+
 
 /**
  * A notification that a lot has been received by the
@@ -146,6 +172,8 @@ asset ProductLot identified by lotId {
   o Long unitCount
   o TemperatureReading[] temperatureReadings optional
   o RhReading[] rhReadings optional
+  o LumenReading[] lumenReadings optional
+  o MoistureReading[] moistureReadings optional
   --> Contract contract
 }
 

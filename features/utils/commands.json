@@ -1,0 +1,23 @@
+{
+  "$class": "org.agrotracker.network.RhReading",
+  "humidity":25,
+  "lot": "org.agrotracker.network.ProductLot#LOT_001"
+}
+
+{
+  "$class": "org.agrotracker.network.TemperatureReading",
+  "temperature":25,
+  "lot": "org.agrotracker.network.ProductLot#LOT_001"
+}
+
+{
+  "$class": "org.agrotracker.network.LumenReading",
+  "lumen":1000,
+  "lot": "org.agrotracker.network.ProductLot#LOT_001"
+}
+
+{
+  "$class": "org.agrotracker.network.MoistureReading",
+  "moisture":15,
+  "lot": "org.agrotracker.network.ProductLot#LOT_001"
+}

@@ -64,3 +64,19 @@ rule RhSensor_C_RhReading {
     resource: "org.agrotracker.network.RhReading"
     action: ALLOW
 }
+
+rule LumenSensor_C_LumenReading {
+    description: "Grant IoT Lumen Sensor devices full access to the appropriate transactions"
+    participant: "org.agrotracker.network.LumenSensor"
+    operation: CREATE
+    resource: "org.agrotracker.network.LumenReading"
+    action: ALLOW
+}
+
+rule MoistureSensor_C_MoistureReading {
+    description: "Grant IoT Moisture Sensor devices full access to the appropriate transactions"
+    participant: "org.agrotracker.network.MoistureSensor"
+    operation: CREATE
+    resource: "org.agrotracker.network.MoistureReading"
+    action: ALLOW
+}

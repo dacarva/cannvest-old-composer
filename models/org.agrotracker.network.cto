@@ -29,9 +29,9 @@ enum ProductType {
 }
 
 /**
- * The status of a shipment
+ * The status of the production
  */
-enum ShipmentStatus {
+enum ProductionStatus {
   o PLANTED
   o HARVESTED
   o DELIVERED
@@ -56,6 +56,8 @@ abstract participant Business identified by participantId {
   o String email
   o String name
   o String participantId //NIT , CC, Passport Etc
+  o Boolean licensed 
+  o Double accountBalance
   o Address address
 }
 
@@ -75,6 +77,78 @@ participant Producer extends Business {
  * A Consumer Entity is a type of participant in the network
  */
 participant Consumer extends Business {
+}
+
+/**
+ * An IoTDevice is any device that is part of the network
+ */
+abstract participant IoTDevice identified by deviceId {
+  o String deviceId
+}
+
+/**
+ * An IoT temperature sensor
+ */
+participant TemperatureSensor extends IoTDevice {
+}
+
+/**
+ * An IoT relative humidity sensor
+ */
+participant RelativeHumiditySensor extends IoTDevice {
+}
+
+/**
+ * An IoT Lux sensor
+ */
+participant LumenSensor extends IoTDevice {
+}
+
+/**
+ * An IoT moisture sensor
+ */
+participant MoistureSensor extends IoTDevice {
+}
+
+//----------------ASSETS-------------------------//
+
+/**
+ * A product lot being tracked as an asset on the ledger
+ */
+asset PlantLot identified by lotId {
+  o String lotId
+  o ProductType type
+  o ProductionStatus status
+  o Long unitCount
+  o TemperatureReading[] temperatureReadings optional
+  o RelativeHumidityReading[] rhReadings optional
+  o LumenReading[] lumenReadings optional
+  o SoilMoistureReading[] moistureReadings optional
+  o DocumentHash[] docHashes optional
+  o ProcessNote[] processNotes optional
+  o ProductReveived productReveived optional
+  o ProductSeeded productSeeded optional
+  o ProductHarvested productHarvested optional
+  --> Contract contract
+}
+
+/**
+ * Defines a contract between a Producer and a Consumer. The Government watches the process
+ * The Consumer pays a set price. The unit price is multiplied by
+ * a penality factor proportional to the deviation from the min and max
+ * negociated temperatures for the product. 
+ */
+asset Contract identified by contractId {
+  o String contractId
+  --> Producer producer
+  --> Consumer consumer
+  --> Government government
+  o DateTime deliveredDateTime
+  o Double unitPrice
+  o Double minTemperature
+  o Double maxTemperature
+  o Double minPenaltyFactor
+  o Double maxPenaltyFactor
 }
 
 //----------------TRANSACTIONS-------------------------//
@@ -119,9 +193,9 @@ transaction SoilMoistureReading extends PlantLotTransaction {
 }
 
 /**
- * A picture taken for quality control in production. Uploaded IPFS Hash
+ * A document or picture taken for quality control in production. Uploaded IPFS Hash
  */
-transaction PictureHash extends PlantLotTransaction {
+transaction DocumentHash extends PlantLotTransaction {
   o String hash // IPFS Hash
 }
 
@@ -144,16 +218,24 @@ transaction ProductReveived extends PlantLotTransaction {
 /**
  * A Lot has been seeded and is growing
  */
-transaction LotSeeded extends PlantLotTransaction {
+transaction ProductSeeded extends PlantLotTransaction {
 }
 
 /**
  * A Lot has been seeded and is growing
  */
-transaction LotHarvested extends PlantLotTransaction {
+transaction ProductHarvested extends PlantLotTransaction {
+}
+
+/**
+ * The license has been revoked or given
+ */
+transaction ProductHarvested extends PlantLotTransaction {
+  o Boolean licenseStatus
 }
 
 
+//----------------EVENTS-------------------------//
 
 
 

@@ -18,6 +18,86 @@
 
 namespace org.agrotracker.network
 
+/**
+ * The type of perishable product being produced
+ */
+enum ProductType {
+  o CANNABIS
+  o COCA
+  o POPPY
+}
+
+/**
+ * The status of the production
+ */
+enum ProductionStatus {
+  o PLANTED
+  o HARVESTED
+  o DELIVERED
+}
+
+/**
+ * A concept for a simple street address
+ */
+concept Address {
+  o String city optional
+  o String country
+  o String street optional
+  o String zip optional
+}
+
+//----------------PARTICIPANTS-------------------------//
+
+/**
+ * An abstract participant type in this business network
+ */
+abstract participant Business identified by participantId {
+  o String participantId //NIT , CC, Passport Etc
+  o Double accountBalance
+  o Address address
+}
+
+/**
+ * A Government Entity is a type of participant in the network
+ */
+participant Government extends Business {
+}
+
+/**
+ * A Crop producer is a type of participant in the network
+ */
+participant Producer extends Business {
+}
+
+/**
+ * A Consumer Entity is a type of participant in the network
+ */
+participant Consumer extends Business {
+}
+/**
+ * An IoTDevice is any device that is part of the network
+ */
+abstract participant IoTDevice identified by deviceId {
+  o String deviceId
+}
+
+/**
+ * An IoT temperature sensor
+ */
+participant TemperatureSensor extends IoTDevice {
+}
+
+
+
+
+
+
+
+
+
+//-----------------------------EXAMPLE ONLY -----------------------//
+
+
 participant SampleParticipant identified by participantId {
   o String participantId
   o String firstName

@@ -230,9 +230,8 @@ transaction ProductHarvested extends PlantLotTransaction {
 /**
  * The license has been revoked or given
  */
-transaction ProductHarvested extends PlantLotTransaction {
-  o Boolean licenseStatus
-}
+
+//PENDING//
 
 
 //----------------EVENTS-------------------------//

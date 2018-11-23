@@ -12,33 +12,39 @@
  * limitations under the License.
  */
 
-/**
- * Sample access control list.
+ //THIS IS THE REAL DEAL//////
+
+// /**
+//  * Sample access control list.
+//  */
+// rule EverybodyCanReadEverything {
+//     description: "Allow all participants read access to all resources"
+//     participant: "org.agrotracker.network.SampleParticipant"
+//     operation: READ
+//     resource: "org.agrotracker.network.*"
+//     action: ALLOW
+// }
+
+// rule EverybodyCanSubmitTransactions {
+//     description: "Allow all participants to submit transactions"
+//     participant: "org.agrotracker.network.SampleParticipant"
+//     operation: CREATE
+//     resource: "org.agrotracker.network.SampleTransaction"
+//     action: ALLOW
+// }
+
+// rule OwnerHasFullAccessToTheirAssets {
+//     description: "Allow all participants full access to their assets"
+//     participant(p): "org.agrotracker.network.SampleParticipant"
+//     operation: ALL
+//     resource(r): "org.agrotracker.network.SampleAsset"
+//     condition: (r.owner.getIdentifier() === p.getIdentifier())
+//     action: ALLOW
+// }
+
+ /**
+ * System and Network Admin access rules
  */
-rule EverybodyCanReadEverything {
-    description: "Allow all participants read access to all resources"
-    participant: "org.agrotracker.network.SampleParticipant"
-    operation: READ
-    resource: "org.agrotracker.network.*"
-    action: ALLOW
-}
-
-rule EverybodyCanSubmitTransactions {
-    description: "Allow all participants to submit transactions"
-    participant: "org.agrotracker.network.SampleParticipant"
-    operation: CREATE
-    resource: "org.agrotracker.network.SampleTransaction"
-    action: ALLOW
-}
-
-rule OwnerHasFullAccessToTheirAssets {
-    description: "Allow all participants full access to their assets"
-    participant(p): "org.agrotracker.network.SampleParticipant"
-    operation: ALL
-    resource(r): "org.agrotracker.network.SampleAsset"
-    condition: (r.owner.getIdentifier() === p.getIdentifier())
-    action: ALLOW
-}
 
 rule SystemACL {
   description:  "System ACL to permit all access"
@@ -62,4 +68,136 @@ rule NetworkAdminSystem {
     operation: ALL
     resource: "org.hyperledger.composer.system.**"
     action: ALLOW
+}
+
+/**
+ * Rules for Participant registry access
+ */
+
+rule Producer_RU_Producer {
+  description: "Grant Producers access to Producer resources"
+  participant: "org.agrotracker.network.Producer"
+  operation: READ, UPDATE
+  resource: "org.agrotracker.network.Producer"
+  action: ALLOW
+}
+
+rule Consumer_RU_Consumer {
+  description: "Grant Consumers access to Consumer resources"
+  participant: "org.agrotracker.network.Consumer"
+  operation: READ, UPDATE
+  resource: "org.agrotracker.network.Consumer"
+  action: ALLOW
+}
+
+rule Government_RU_Government {
+  description: "Grant Governments access to Government resources"
+  participant: "org.agrotracker.network.Government"
+  operation: READ, UPDATE
+  resource: "org.agrotracker.network.Government"
+  action: ALLOW
+}
+
+rule Producer_RU_Consumer {
+  description: "Grant Producers access to Consumer resources"
+  participant: "org.agrotracker.network.Producer"
+  operation: READ, UPDATE
+  resource: "org.agrotracker.network.Consumer"
+  action: ALLOW
+}
+
+/**
+ * Rules for Asset registry access
+ */
+
+rule ALL_RU_PlantLot {
+  description: "Grant All Participants in org.agrotracker.network namespace READ/UPDATE access to PlantLot assets"
+  participant: "org.agrotracker.network.*"
+  operation: READ,UPDATE
+  resource: "org.agrotracker.network.PlantLot"
+  action: ALLOW
+}
+
+rule ALL_RU_Contract {
+  description: "Grant All Participants in org.agrotracker.network namespace READ/UPDATE access to Contract assets"
+  participant: "org.agrotracker.network.*"
+  operation: READ,UPDATE
+  resource: "org.agrotracker.network.Contract"
+  action: ALLOW
+}
+
+/**
+ * Rules for Transaction invocations
+ */
+
+rule Producer_C_ProductSeeded {
+  description: "Grant Producers access to invoke ProductSeeded transaction"
+  participant: "org.agrotracker.network.Producer"
+  operation: CREATE
+  resource: "org.agrotracker.network.ProductSeeded"
+  action: ALLOW
+}
+
+rule Producer_C_ProductHarvested {
+  description: "Grant Producers access to invoke ProductHarvested transaction"
+  participant: "org.agrotracker.network.Producer"
+  operation: CREATE
+  resource: "org.agrotracker.network.ProductHarvested"
+  action: ALLOW
+}
+
+rule Producer_C_DocumentHash {
+  description: "Grant Producers access to invoke DocumentHash transaction"
+  participant: "org.agrotracker.network.Producer"
+  operation: CREATE
+  resource: "org.agrotracker.network.DocumentHash"
+  action: ALLOW
+}
+
+rule Producer_C_ProcessNote {
+  description: "Grant Producers access to invoke ProcessNote transaction"
+  participant: "org.agrotracker.network.Producer"
+  operation: CREATE
+  resource: "org.agrotracker.network.ProcessNote"
+  action: ALLOW
+}
+
+rule Consumer_C_ProductReceived {
+  description: "Grant Producers access to invoke ProductReceived transaction"
+  participant: "org.agrotracker.network.Consumer"
+  operation: CREATE
+  resource: "org.agrotracker.network.ProductReceived"
+  action: ALLOW
+}
+
+rule TemperatureSensor_C_TemperatureReading {
+  description: "Grant IoT Temperature Sensor devices full access to the appropriate transactions"
+  participant: "org.agrotracker.network.TemperatureSensor"
+  operation: CREATE
+  resource: "org.agrotracker.network.TemperatureReading"
+  action: ALLOW
+}
+
+rule RelativeHumiditySensor_C_RelativeHumidityReading {
+  description: "Grant IoT HR Sensor devices full access to the appropriate transactions"
+  participant: "org.agrotracker.network.RelativeHumiditySensor"
+  operation: CREATE
+  resource: "org.agrotracker.network.RelativeHumidityReading"
+  action: ALLOW
+}
+
+rule LumenSensor_C_LumenReading {
+  description: "Grant IoT Lumen Sensor devices full access to the appropriate transactions"
+  participant: "org.agrotracker.network.LumenSensor"
+  operation: CREATE
+  resource: "org.agrotracker.network.LumenReading"
+  action: ALLOW
+}
+
+rule MoistureSensor_C_SoilMoistureReading {
+  description: "Grant IoT Moisture Sensor devices full access to the appropriate transactions"
+  participant: "org.agrotracker.network.MoistureSensor"
+  operation: CREATE
+  resource: "org.agrotracker.network.SoilMoistureReading"
+  action: ALLOW
 }

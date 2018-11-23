@@ -237,8 +237,44 @@ transaction ProductHarvested extends PlantLotTransaction {
 
 //----------------EVENTS-------------------------//
 
+/**
+ * An event - when the temperature goes outside the agreed-upon boundaries
+ */
+event TemperatureThresholdEvent {
+  o String message
+  o Double temperature
+  --> PlantLot lot
+}
 
+/**
+ * An event - when the product is received by the consumer
+ */
+event ProductReceivedEvent {
+  o String message
+  --> PlantLot lot
+}
+ 
+/**
+ * An event - when the product is seeded
+ */
+event ProductSeededEvent {
+  o String message
+  --> PlantLot lot
+}
 
+/**
+ * An event - when the product is harvested
+ */
+event ProductHarvestedEvent {
+  o String message
+  --> PlantLot lot
+}
+
+/**
+ * JUST FOR INITIALIZING A DEMO
+ */
+transaction SetupDemo {
+}
 
 
 
@@ -259,26 +295,26 @@ transaction ProductHarvested extends PlantLotTransaction {
 //-----------------------------EXAMPLE ONLY -----------------------//
 
 
-participant SampleParticipant identified by participantId {
-  o String participantId
-  o String firstName
-  o String lastName
-}
+// participant SampleParticipant identified by participantId {
+//   o String participantId
+//   o String firstName
+//   o String lastName
+// }
 
 
-asset SampleAsset identified by assetId {
-  o String assetId
-  --> SampleParticipant owner
-  o String value
-}
+// asset SampleAsset identified by assetId {
+//   o String assetId
+//   --> SampleParticipant owner
+//   o String value
+// }
 
-transaction SampleTransaction {
-  --> SampleAsset asset
-  o String newValue
-}
+// transaction SampleTransaction {
+//   --> SampleAsset asset
+//   o String newValue
+// }
 
-event SampleEvent {
-  --> SampleAsset asset
-  o String oldValue
-  o String newValue
-}
+// event SampleEvent {
+//   --> SampleAsset asset
+//   o String oldValue
+//   o String newValue
+// }

@@ -18,11 +18,129 @@
 
 namespace org.agrotracker.network
 
+
+/**
+ * The type of perishable product being produced
+ */
+enum ProductType {
+  o CANNABIS
+  o COCA
+  o POPPY
+}
+
+/**
+ * The status of a shipment
+ */
+enum ShipmentStatus {
+  o PLANTED
+  o HARVESTED
+  o DELIVERED
+}
+
+/**
+ * An abstract transaction that is related to a plant Lot
+ */
+abstract transaction PlantLotTransaction {
+  --> PlantLot lot
+}
+
+/**
+ * A temperature reading in production. E.g. received from a
+ * device 
+ */
+transaction TemperatureReading extends PlantLotTransaction {
+  o Double temperature // in degrees Celcius (ºC)
+}
+
+/**
+ * A relative humidity reading in production. E.g. received from a
+ * device 
+ */
+transaction RelativeHumidityReading extends PlantLotTransaction {
+  o Double rh // in percentage (%)
+}
+
+/**
+ * A light intensity reading in production. E.g. received from a
+ * device 
+ */
+transaction LumenReading extends PlantLotTransaction {
+  o Double lumen // in LUX
+}
+
+/**
+ * A soil moisture reading in production. E.g. received from a
+ * device 
+ */
+transaction SoilMoistureReading extends PlantLotTransaction {
+  o Double moisture // in percentage (%)
+}
+
+/**
+ * A picture taken for quality control in production. Uploaded IPFS Hash
+ */
+transaction PictureHash extends PlantLotTransaction {
+  o String hash // IPFS Hash
+}
+
+/**
+ * A note written during the process. Manual Input
+ */
+transaction ProcessNote extends PlantLotTransaction {
+  o String note // 
+}
+
+/**
+ * A notification that a shipment has been received by the
+ * client and that funds should be transferred from the client
+ * to the producer
+ */
+transaction ProductReveived extends PlantLotTransaction {
+  o DateTime receivedDateTime optional
+}
+
+/**
+ * A Lot has been seeded and is growing
+ */
+transaction LotSeeded extends PlantLotTransaction {
+}
+
+/**
+ * A Lot has been seeded and is growing
+ */
+transaction LotHarvested extends PlantLotTransaction {
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------------EXAMPLE ONLY -----------------------//
+
+
 participant SampleParticipant identified by participantId {
   o String participantId
   o String firstName
   o String lastName
 }
+
 
 asset SampleAsset identified by assetId {
   o String assetId

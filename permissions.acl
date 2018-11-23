@@ -56,3 +56,11 @@ rule TemperatureSensor_C_TemperatureReading {
     resource: "org.agrotracker.network.TemperatureReading"
     action: ALLOW
 }
+
+rule RhSensor_C_RhReading {
+    description: "Grant IoT Rh Sensor devices full access to the appropriate transactions"
+    participant: "org.agrotracker.network.RhSensor"
+    operation: CREATE
+    resource: "org.agrotracker.network.RhReading"
+    action: ALLOW
+}

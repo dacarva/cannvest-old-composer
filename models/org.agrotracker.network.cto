@@ -93,6 +93,12 @@ abstract participant IoTDevice identified by deviceId {
 participant TemperatureSensor extends IoTDevice {
 }
 
+/**
+ * An Relative Humidity temperature sensor
+ */
+participant RhSensor extends IoTDevice {
+}
+
 //-------------------TRANSACTIONS--------------------//
 
 
@@ -108,7 +114,14 @@ abstract transaction ProductLotTransaction {
  * device within a temperature controlled shipping container
  */
 transaction TemperatureReading extends ProductLotTransaction {
-  o Double centigrade
+  o Double temperature
+}
+
+/**
+ * An RH reading for a lot
+ */
+transaction RhReading extends ProductLotTransaction {
+  o Double humidity
 }
 
 
@@ -132,6 +145,7 @@ asset ProductLot identified by lotId {
   o ProductLotStatus status
   o Long unitCount
   o TemperatureReading[] temperatureReadings optional
+  o RhReading[] rhReadings optional
   --> Contract contract
 }
 

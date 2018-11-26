@@ -66,6 +66,7 @@ abstract participant Business identified by participantId {
  */
 participant Producer extends Business {
   o Double accountBalance
+  o Boolean validLicense
 }
 
 /**
@@ -73,6 +74,7 @@ participant Producer extends Business {
  */
 participant Consumer extends Business {
   o Double accountBalance
+  o Boolean validLicense
 }
 
 /**
@@ -121,6 +123,21 @@ participant MoistureSensor extends IoTDevice {
 abstract transaction ProductLotTransaction {
   --> ProductLot lot
 }
+
+/**
+ * An abstract transaction that is related to a Consumer Particpant
+ */
+abstract transaction LicenseUpdateTransaction {
+  o Boolean licenseStatus
+  --> LicenseContract licenseContract
+}
+
+transaction ConsumerLicenseUpdate extends LicenseUpdateTransaction {
+}
+
+transaction ProducerLicenseUpdate extends LicenseUpdateTransaction {
+}
+
 
 /**
  * An temperature reading for a lot. E.g. received from a
@@ -175,14 +192,6 @@ transaction ProductLotReceived extends ProductLotTransaction {
 }
 
 
-/**
- * A notification that a license has been updated for a product lot
- */
-transaction ProductLotLicenseUpdate extends ProductLotTransaction {
-  o Boolean licenseStatus
-}
-
-
 
 //-------------------ASSETS--------------------//
 
@@ -194,7 +203,7 @@ asset ProductLot identified by lotId {
   o ProductType type
   o ProductLotStatus status
   o Long unitCount
-  o Boolean licenseStatus
+  // o Boolean licenseStatus
   o TemperatureReading[] temperatureReadings optional
   o RhReading[] rhReadings optional
   o LumenReading[] lumenReadings optional
@@ -202,8 +211,6 @@ asset ProductLot identified by lotId {
   o IpfsFileReading[] ipfsFileReadings optional
   o ProcessNoteReading[] processNoteReadings optional
   --> Contract contract
-  --> LicenseContract licenseContract
-
 }
 
 /**
@@ -225,7 +232,9 @@ asset Contract identified by contractId {
 
 asset LicenseContract identified by contractId {
   o String contractId
-  --> Government government
+  --> Government government optional
+  --> Producer producer optional
+  --> Consumer consumer optional
 }
 
 

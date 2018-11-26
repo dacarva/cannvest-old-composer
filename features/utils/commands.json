@@ -37,7 +37,10 @@
   "lot": "org.agrotracker.network.ProductLot#LOT_001"
 }
 {
-  composer network install -c PeerAdmin@hlfv1 -a agrotracker-network@0.0.24.bna,
-  composer network start -c PeerAdmin@hlfv1 -n agrotracker-network -l "ERROR" -A admin -S adminpw -f agrotracker-networkadmin.card -V 0.0.24,
-  composer-rest-server -c admin@agrotracker-network -n never -u true -d n
+  composer archive create -t dir -n .
+  composer network install -c PeerAdmin@hlfv1 -a agrotracker-network@0.0.24.bna
+  composer network start -c PeerAdmin@hlfv1 -n agrotracker-network -l "ERROR" -A admin -S adminpw -f agrotracker-networkadmin.card -V 0.0.24
+  composer-rest-server -c admin@agrotracker-network -n never -u true -d n.
+  composer network upgrade -c PeerAdmin@hlfv1 -n agrotracker-network -V 0.0.30.deploy1
+
 }

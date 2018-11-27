@@ -32,7 +32,8 @@
     "nyc": "latest",
     "mkdirp": "latest",
     "mocha": "latest"
+  },
+  "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.11"
   }
 }
-
-

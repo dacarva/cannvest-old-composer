@@ -5,6 +5,9 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
+import Default from "@/layouts/Default.vue";
+Vue.component("default-layout", Default);
+
 new Vue({
   router,
   store,

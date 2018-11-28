@@ -69,12 +69,12 @@ while True:
   }  
   
   post_data(base_url + 'TemperatureReading', temperature_reading)
-  post_data(base_url + 'RhReading', humidity_reading)
-  post_data(base_url + 'MoistureReading', moisture_reading)
-  post_data(base_url + 'LumenReading', lumen_reading)
-  post_data(base_url + 'IpfsFileReading', ipfs_reading)
-  post_data(base_url + 'ProcessNoteReading', process_note_reading)
+  #post_data(base_url + 'RhReading', humidity_reading)
+  #post_data(base_url + 'MoistureReading', moisture_reading)
+  #post_data(base_url + 'LumenReading', lumen_reading)
+  #post_data(base_url + 'ProcessNoteReading', process_note_reading)
+  #post_data(base_url + 'IpfsFileReading', ipfs_reading)
 
 
   #Sleep for 5 minutes
-  time.sleep(300)
+  #time.sleep(20)

@@ -3,7 +3,7 @@
     "composer": "^0.20.4"
   },
   "name": "agrotracker-network",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "A network to track controlled assets",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/agrotracker-network.bna",
@@ -34,6 +34,11 @@
     "mocha": "latest"
   },
   "dependencies": {
-    "bootstrap-vue": "^2.0.0-rc.11"
+    "axios": "^0.18.0",
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "moment": "^2.22.2",
+    "pusher": "^2.2.0",
+    "pusher-js": "^4.3.1",
+    "vue-chartjs": "^3.4.0"
   }
 }

@@ -1,15 +1,17 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <h1>Default here</h1>
+      <!-- <h1>Default here</h1> -->
       <!-- Insert sidebar -->
-      <navbar></navbar>
+      <!-- <navbar></navbar> -->
       
-      <sidebar></sidebar>
+      <!-- <sidebar></sidebar> -->
 
-      <footer></footer>
+      <slot></slot>
 
-      <app-footer></app-footer>
+      <!-- <footer></footer> -->
+
+      <!-- <app-footer></app-footer> -->
       <!-- Insert content -->
     </div>
   </div>

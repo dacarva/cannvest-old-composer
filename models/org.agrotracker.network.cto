@@ -250,6 +250,13 @@ event TemperatureThresholdEvent {
   o Double temperature
   --> ProductLot lot
 }
+/**
+ * An event - when the temperature reading has been updated
+ */
+event TemperatureReadingEvent {
+  o Double temperature
+  --> ProductLot lot
+}
 
 /**
  * JUST FOR INITIALIZING A DEMO

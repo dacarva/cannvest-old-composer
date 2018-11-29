@@ -24,10 +24,10 @@ while True:
   print("Cycle started")
 
   #Get dummy sensor data
-  temperature = random.randint(1,40)
-  humidity = random.randint(1,100)
-  moisture = random.randint(1,100)
-  lumen = random.randint(100,1000)
+  temperature = random.randint(25,30)
+  humidity = random.randint(40,60)
+  moisture = random.randint(40,60)
+  lumen = random.randint(700,1000)
   ipfs = 'Qmxx' + str(random.randint(1,100))
   note = 'ABC' + str(random.randint(1,100))
 
@@ -69,9 +69,9 @@ while True:
   }  
   
   post_data(base_url + 'TemperatureReading', temperature_reading)
-  #post_data(base_url + 'RhReading', humidity_reading)
-  #post_data(base_url + 'MoistureReading', moisture_reading)
-  #post_data(base_url + 'LumenReading', lumen_reading)
+  post_data(base_url + 'RhReading', humidity_reading)
+  post_data(base_url + 'MoistureReading', moisture_reading)
+  post_data(base_url + 'LumenReading', lumen_reading)
   #post_data(base_url + 'ProcessNoteReading', process_note_reading)
   #post_data(base_url + 'IpfsFileReading', ipfs_reading)
 

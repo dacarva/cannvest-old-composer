@@ -96,8 +96,6 @@
 <script>
   import axios from 'axios';
 
-  const hyperledgerApiUrl = "http://localhost:3000/api/";
-
   function stringAfterCharacter (string, character) {
     return string.substring(string.indexOf(character) + character.length)
   }
@@ -121,19 +119,19 @@
     },
     methods: {
       getContractData () {
-        axios.get(hyperledgerApiUrl + 'Contract/' + this.selectedLotContractId).then(response => {
+        axios.get(this.$hyperledgerApiUrl + 'Contract/' + this.selectedLotContractId).then(response => {
           this.selectedLotContract = response.data;
           this.productLotProducerId = stringAfterCharacter(this.selectedLotContract.producer,"#");
           this.productLotConsumerId = stringAfterCharacter(this.selectedLotContract.consumer,"#");                   
         });  
       },
       getConsumerData () {
-        axios.get(hyperledgerApiUrl + 'Consumer/' + this.productLotConsumerId).then(response => {
+        axios.get(this.$hyperledgerApiUrl + 'Consumer/' + this.productLotConsumerId).then(response => {
           this.productLotConsumer = response.data[0];
         });  
       },
       getProducerData () {
-        axios.get(hyperledgerApiUrl + 'Producer/' + this.productLotProducerId).then(response => {
+        axios.get(this.$hyperledgerApiUrl + 'Producer/' + this.productLotProducerId).then(response => {
           this.productLotProducer = response.data[0];
         });  
       }      

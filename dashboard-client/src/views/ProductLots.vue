@@ -15,7 +15,6 @@
   import AssetProfile from '@/components/assets-participants/AssetProfile.vue';
   import AssetData from '@/components/assets-participants/AssetData.vue';
 
-  const hyperledgerApiUrl = "http://localhost:3000/api/";
 
   function stringAfterCharacter (string, character) {
     return string.substring(string.indexOf(character) + character.length)
@@ -31,7 +30,7 @@
     },
     methods: {
       getProductLots () {
-        axios.get(hyperledgerApiUrl + 'ProductLot').then(response => {
+        axios.get(this.$hyperledgerApiUrl + 'ProductLot').then(response => {
           this.productLotIds = response.data.map(a => a.lotId);
           this.productLots = response.data.map(a => a);
         });

@@ -21,9 +21,7 @@ Vue.component('default-layout', Default);
 
 Vue.config.productionTip = false;
 Vue.prototype.$eventHub = new Vue();
-
-// Vue.use(axios);
-
+Vue.prototype.$hyperledgerApiUrl = 'http://localhost:3000/api/';
 
 new Vue({
   router,

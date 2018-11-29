@@ -13,10 +13,11 @@ headers = {
 
 def post_data(api_url, json_data):
   r = requests.post(api_url, headers=headers, data=json.dumps(json_data))
+  print ("Working on:", api_url)
   if r.status_code != 200:
     print ("Error:", r.status_code)
   else:
-    print (r.status_code)
+    print ("Success", r.status_code)
   time.sleep(20)
 
 while True:
@@ -30,50 +31,62 @@ while True:
   lumen = random.randint(700,1000)
   ipfs = 'Qmxx' + str(random.randint(1,100))
   note = 'ABC' + str(random.randint(1,100))
-
-  #Create JSON objects for each reading
-  temperature_reading = {
-    "$class": "org.agrotracker.network.TemperatureReading",
-    "temperature": temperature,
-    "lot": "org.agrotracker.network.ProductLot#LOT_001"
-  }
-
-  humidity_reading = {
-    "$class": "org.agrotracker.network.RhReading",
-    "humidity": humidity,
-    "lot": "org.agrotracker.network.ProductLot#LOT_001"
-  }
   
-  moisture_reading = {
-  "$class": "org.agrotracker.network.MoistureReading",
-  "moisture": moisture,
-  "lot": "org.agrotracker.network.ProductLot#LOT_001"
-  }
+  for lot in range(1,5):
+    print("Cycle started for LOT_00" + str(lot) )
 
-  lumen_reading = {
-    "$class": "org.agrotracker.network.LumenReading",
-    "lumen": lumen,
-    "lot": "org.agrotracker.network.ProductLot#LOT_001"
-  }
+    #Get dummy sensor data
+    temperature = random.randint(25,30)
+    humidity = random.randint(40,60)
+    moisture = random.randint(40,60)
+    lumen = random.randint(700,1000)
+    ipfs = 'Qmxx' + str(random.randint(1,100))
+    note = 'ABC' + str(random.randint(1,100))
 
-  ipfs_reading = {
-    "$class": "org.agrotracker.network.IpfsFileReading",
-    "ipfsFile": ipfs,
-    "lot": "org.agrotracker.network.ProductLot#LOT_001"
-  }
+    lotId = 'org.agrotracker.network.ProductLot#LOT_00' + str(lot)
+    #Create JSON objects for each reading
+    temperature_reading = {
+      "$class": "org.agrotracker.network.TemperatureReading",
+      "temperature": temperature,
+      "lot": lotId
+    }
 
-  process_note_reading = {
-    "$class": "org.agrotracker.network.ProcessNoteReading",
-    "processNote": note,
-    "lot": "org.agrotracker.network.ProductLot#LOT_001"
-  }  
+    humidity_reading = {
+      "$class": "org.agrotracker.network.RhReading",
+      "humidity": humidity,
+      "lot":lotId
+    }
+    
+    moisture_reading = {
+    "$class": "org.agrotracker.network.MoistureReading",
+    "moisture": moisture,
+    "lot": lotId
+    }
+
+    lumen_reading = {
+      "$class": "org.agrotracker.network.LumenReading",
+      "lumen": lumen,
+      "lot": lotId
+    }
+
+    ipfs_reading = {
+      "$class": "org.agrotracker.network.IpfsFileReading",
+      "ipfsFile": ipfs,
+      "lot": lotId
+    }
+
+    process_note_reading = {
+      "$class": "org.agrotracker.network.ProcessNoteReading",
+      "processNote": note,
+      "lot": lotId
+    }      
   
-  post_data(base_url + 'TemperatureReading', temperature_reading)
-  post_data(base_url + 'RhReading', humidity_reading)
-  post_data(base_url + 'MoistureReading', moisture_reading)
-  post_data(base_url + 'LumenReading', lumen_reading)
-  #post_data(base_url + 'ProcessNoteReading', process_note_reading)
-  #post_data(base_url + 'IpfsFileReading', ipfs_reading)
+    post_data(base_url + 'TemperatureReading', temperature_reading)
+    post_data(base_url + 'RhReading', humidity_reading)
+    post_data(base_url + 'MoistureReading', moisture_reading)
+    post_data(base_url + 'LumenReading', lumen_reading)
+    #post_data(base_url + 'ProcessNoteReading', process_note_reading)
+    #post_data(base_url + 'IpfsFileReading', ipfs_reading)
 
 
   #Sleep for 5 minutes

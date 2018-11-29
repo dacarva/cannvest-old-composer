@@ -8,35 +8,20 @@
     </d-card-header>
 
     <d-card-body class="pt-0">
-      <d-row class="border-bottom py-2 bg-light">
 
-        <!-- Date Range -->
-        <d-col col sm="6" class="d-flex mb-2 mb-sm-0">
-          <d-input-group size="sm" class="date-range d-flex justify-content-left">
-            <d-datepicker v-model="dateRange.from" :highlighted="{ from: dateRange.from, to: dateRange.to || new Date() }" placeholder="Start Date" typeable small />
-            <d-datepicker v-model="dateRange.to" :highlighted="{ from: dateRange.from, to: dateRange.to || new Date() }" placeholder="End Date" typeable small />
-            <d-input-group-text slot="append">
-              <i class="material-icons">&#xE916;</i>
-            </d-input-group-text>
-          </d-input-group>
-        </d-col>
-
-        <!-- View Full Report -->
-        <d-col col sm="6">
-          <d-button size="sm" class="d-flex btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0">View Full Report &rarr;</d-button>
-        </d-col>
-
-      </d-row>
 
       <!-- Legend & Chart -->
       <div ref="legend"></div>
-      <canvas height="120" ref="canvas" style="max-width: 100% !important;"></canvas>
+      <canvas height="200" ref="canvas" style="max-width: 100% !important;"></canvas>
 
     </d-card-body>
   </d-card>
 </template>
 
 <script>
+
+//FALTA ARREGLAR EL HOVER
+
 import Chart from '../../utils/chart';
 
 const defaultChartData = {
@@ -52,21 +37,10 @@ const defaultChartData = {
     borderWidth: 1.5,
     pointRadius: 0,
     pointHoverRadius: 3,
-  }, {
-    label: 'Past Month',
-    fill: 'start',
-    data: [380, 430, 120, 230, 410, 740, 472, 219, 391, 229, 400, 203, 301, 380, 291, 620, 700, 300, 630, 402, 320, 380, 289, 410, 300, 530, 630, 720, 780, 1200],
-    backgroundColor: 'rgba(255,65,105,0.1)',
-    borderColor: 'rgba(255,65,105,1)',
-    pointBackgroundColor: '#ffffff',
-    pointHoverBackgroundColor: 'rgba(255,65,105,1)',
-    borderDash: [3, 3],
-    borderWidth: 1,
-    pointRadius: 0,
-    pointHoverRadius: 2,
-    pointBorderColor: 'rgba(255,65,105,1)',
   }],
 };
+
+
 
 export default {
   name: 'sensor-chart',
@@ -75,27 +49,70 @@ export default {
       type: String,
       default: 'Users Overview',
     },
-    chartData: {
-      type: Object,
-      default() {
-        return defaultChartData;
-      },
+    labels: {
+      type: Array,
     },
+    data: {
+      type: Array,
+    }
   },
-  data() {
-    return {
-      dateRange: {
-        from: null,
-        to: null,
-      },
-    };
-  },
-  mounted() {
-    const chartOptions = {
-      ...{
+  computed: {
+    chartData: function () {
+      const defaultColor = '193,58,80';
+      const temperatureColor = '0,123,255';
+      const hrColor = '188,196,82';
+      const lumenColor = '216,145,45';
+      const moistureColor = '178,219,76';
+
+      let borderColor = 'rgba(defaultColor,1)';
+      let backgroundColor = 'rgba(defaultColor,0.1)';
+      let pointHoverBackgroundColor = 'rgb(defaultColor)';
+
+      function setColor(color) {
+        borderColor = 'rgba('+ color + ',1)';
+        backgroundColor = 'rgba('+ color + ',0.1)';
+        pointHoverBackgroundColor = 'rgb('+ color + ')';
+      }
+
+      if (this.title === 'Temperatura (ºC)'){
+        setColor(temperatureColor);
+      }
+
+      if (this.title === 'Humedad Relativa (%)'){
+        setColor(hrColor);
+      }
+
+      if (this.title === 'Luminosidad (lumen)'){
+        setColor(lumenColor);
+      }
+      
+      if (this.title === 'Humedad del Suelo (%)'){
+        setColor(moistureColor);
+      }      
+
+      return {
+        labels: this.labels,
+        datasets: [{
+          label: this.title,
+          fill: 'start',
+          data: this.data,
+          backgroundColor: backgroundColor,
+          borderColor: borderColor,
+          pointBackgroundColor: '#ffffff',
+          pointHoverBackgroundColor: pointHoverBackgroundColor,
+          borderWidth: 1.5,
+          pointRadius: 0,
+          pointHoverRadius: 3,        
+        }]
+      }
+    },
+    chartOptions: function () {
+      return {
+
         responsive: true,
         legend: {
           position: 'top',
+          // display: false
         },
         elements: {
           line: {
@@ -108,25 +125,25 @@ export default {
         },
         scales: {
           xAxes: [{
-            gridLines: false,
-            ticks: {
-              callback(tick, index) {
-                // Jump every 7 values on the X axis labels to avoid clutter.
-                return index % 7 !== 0 ? '' : tick;
+            type: 'time',
+            time: {
+              displayFormats: {
+                minute: 'DD-MM-YYYY HH:mm'
               },
             },
+            ticks: {
+              source: 'auto'
+            }
           }],
           yAxes: [{
             ticks: {
-              suggestedMax: 45,
-              callback(tick) {
-                if (tick === 0) {
-                  return tick;
-                }
-                // Format the amounts using Ks for thousands.
-                return tick > 999 ? `${(tick / 1000).toFixed(1)}K` : tick;
-              },
+              beginAtZero: true,
+              suggestedMax: 50,
             },
+            scaleLabel: {
+              display: true,
+              labelString: this.title
+            }
           }],
         },
         hover: {
@@ -138,24 +155,35 @@ export default {
           mode: 'nearest',
           intersect: false,
         },
-      },
-      ...this.chartOptions,
-    };
+              
+      }
+    },
 
-    const BlogUsersOverview = new Chart(this.$refs.canvas, {
-      type: 'LineWithLine',
-      data: this.chartData,
-      options: chartOptions,
-    });
+    sensorChart: function () {
 
-      // They can still be triggered on hover.
-    const buoMeta = BlogUsersOverview.getDatasetMeta(0);
-    buoMeta.data[0]._model.radius = 0;
-    buoMeta.data[this.chartData.datasets[0].data.length - 1]._model.radius = 0;
-
-    // Render the chart.
-    BlogUsersOverview.render();
+      const sensorChart = new Chart(this.$refs.canvas, {
+        type: 'LineWithLine',
+        data: this.chartData,
+        options: this.chartOptions,
+      });      
+      return sensorChart
+    }
   },
+
+  methods:{
+    renderChart () {
+
+        
+      const chartMeta = this.sensorChart.getDatasetMeta(0);
+      chartMeta.data[0]._model.radius = 0;
+      chartMeta.data[this.chartData.datasets[0].data.length - 1]._model.radius = 0;
+
+      // Render the chart.
+      this.sensorChart.render();
+    }
+  },
+  mounted() {
+    this.renderChart()
+  }
 };
 </script>
-

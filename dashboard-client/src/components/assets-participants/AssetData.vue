@@ -4,35 +4,33 @@
       <!-- Users Overview -->
       <d-col lg="6" md="6" sm="12" class="mb-4">
         <!-- <sensor-chart /> -->
-        <sensor-chart-mod :title="`Temperatura (ºC)`" :data="temperatureReadings" :labels="temperatureTimeStamp" v-if="temperatureReadings" />
+        <sensor-chart :title="`Temperatura (ºC)`"  :data="temperatureReadings" :labels="temperatureTimeStamp" v-if="temperatureReadings" />
 
       </d-col>
 
       <!-- Users by Device (lite) -->
       <d-col lg="6" md="6" sm="12" class="mb-4">
-        <sensor-chart-mod :title="`Humedad Relativa (%)`" :data="rHReadings" :labels="rHTimeStamp" v-if="rHReadings" />
+        <sensor-chart :title="`Humedad Relativa (%)`"  :data="rHReadings" :labels="rHTimeStamp" v-if="rHReadings" />
       </d-col>
     </d-row>
     <d-row>
       <!-- Users Overview -->
       <d-col lg="6" md="6" sm="12" class="mb-4">
         <!-- <sensor-chart /> -->
-        <sensor-chart-mod :title="`Luminosidad (lumen)`" :data="lumenReadings" :labels="lumenTimeStamp" v-if="lumenReadings" />
+        <sensor-chart :title="`Luminosidad (lumen)`"  :data="lumenReadings" :labels="lumenTimeStamp" v-if="lumenReadings" />
 
       </d-col>
 
       <!-- Users by Device (lite) -->
       <d-col lg="6" md="6" sm="12" class="mb-4">
-        <sensor-chart-mod :title="`Humedad del Suelo (%)`" :data="moistureReadings" :labels="moistureTimeStamp" v-if="moistureReadings" />
+        <sensor-chart :title="`Humedad del Suelo (%)`"  :data="moistureReadings" :labels="moistureTimeStamp" v-if="moistureReadings" />
       </d-col>
     </d-row>
-
   </div>
 </template>
 
 <script>
 import SensorChart from '@/components/charts/SensorChart.vue';
-import SensorChartMod from '@/components/charts/SensorChartMod.vue';
 
 
 
@@ -40,7 +38,6 @@ export default {
   name: 'asset-data',
   components: {
     SensorChart,
-    SensorChartMod
   },
   props: {
     asset: {
@@ -50,11 +47,9 @@ export default {
   },
   data() {
     return {
-      chartTitle: 'abcd',
     };
   },
   methods: {
-
   },
   computed: {
     //NOTA:WE HAVE TO ENSURE THAT WE HAVE DATA IN THE BLOCKCHAIN TO SHOW THE MODULE

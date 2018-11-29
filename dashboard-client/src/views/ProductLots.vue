@@ -1,10 +1,9 @@
 <template>
 
   <d-container fluid class="main-content-container px-4">
-    <label for="component-dropdown">Selección de lote de producto: </label>
-    <custom-dropdown id="component-dropdown" :options="productLotIds" v-model="selectedLotId" > </custom-dropdown>
+    <custom-dropdown  :options="productLotIds" v-model="selectedLotId" > </custom-dropdown>
     <asset-profile v-if="selectedLot" :asset="selectedLot"></asset-profile>
-    <asset-data v-if="selectedLot" :asset="selectedLot"></asset-data>
+    <asset-data v-if="selectedLot" :asset="selectedLot" :key="componentKey"></asset-data>
   </d-container>
     
 </template>
@@ -12,6 +11,8 @@
 <script>
   import axios from 'axios';
   import CustomDropdown from '@/components/forms/CustomDropdown.vue';
+  // import IpfsUploader from '@/components/forms/IpfsUploader.vue';
+
   import AssetProfile from '@/components/assets-participants/AssetProfile.vue';
   import AssetData from '@/components/assets-participants/AssetData.vue';
 
@@ -26,6 +27,7 @@
         productLotIds: [],
         productLots: [],
         selectedLotId : '',
+        componentKey: 0,
       }
     },
     methods: {
@@ -35,6 +37,9 @@
           this.productLots = response.data.map(a => a);
         });
       },
+      forceRerender () {
+        this.componentKey += 1;  
+      }
     },
     mounted () {
     },
@@ -46,6 +51,7 @@
         for (let i = 0; i < this.productLots.length; i++){
           let lot = this.productLots[i];
           if (lot.lotId === this.selectedLotId){
+            this.forceRerender();
             return lot;
           }
         }
@@ -56,6 +62,7 @@
       CustomDropdown,
       AssetProfile,
       AssetData,
+      // IpfsUploader
     }
   }
 </script>

@@ -23,6 +23,11 @@ Vue.config.productionTip = false;
 Vue.prototype.$eventHub = new Vue();
 Vue.prototype.$hyperledgerApiUrl = 'http://localhost:3000/api/';
 
+
+
+// Vue.use(axios);
+
+
 new Vue({
   router,
   render: h => h(App),

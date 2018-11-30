@@ -181,7 +181,8 @@ transaction IpfsFileReading extends ProductLotTransaction {
  * An Process note as a String Transaction reading
  */
 transaction ProcessNoteReading extends ProductLotTransaction {
-  o String processNote // Identified by Hash
+  o String processNote 
+  o String noteTitle
 }
 
 /**

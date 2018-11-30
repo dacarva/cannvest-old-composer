@@ -12,7 +12,6 @@ import 'vue2-dropzone/dist/vue2Dropzone.css'
 // Core
 import App from './App.vue';
 import router from './router';
-import axios from 'axios';
 
 // Layouts
 import Default from '@/layouts/Default.vue';
@@ -32,12 +31,6 @@ Vue.prototype.$hyperledgerApiConfig = {
 };
 Vue.prototype.$ipfs = window.IpfsHttpClient('localhost', '5001');
 Vue.prototype.$ipfsGateway = 'http://localhost:8080/ipfs/';
-
-
-
-
-
-// Vue.use(axios);
 
 new Vue({
   router,

@@ -1,6 +1,8 @@
 <template>
   <d-card>
-    <d-card-header></d-card-header>
+    <d-card-header class="border-bottom">
+      <h6 class="m-0">Adjuntar archivos relevantes para el lote de producto</h6>
+    </d-card-header>
     <d-card-body>
       <vue-dropzone id="drop1" :options="dropOptions" @vdropzone-file-added="vfileAdded" @vdropzone-success="vsuccess"></vue-dropzone>
     </d-card-body>
@@ -13,12 +15,7 @@
   import vue2Dropzone from 'vue2-dropzone';
   import * as fileReaderPullStream from 'pull-file-reader';
 
-  // import ipfsClient from 'ipfs-http-client';
   import axios from 'axios';
-
-  // const ipfs = ipfsClient('localhost', '5001', { protocol: 'http' }) // leaving out the arguments will default to these values
-
-  // const ipfs = window.IpfsHttpClient('localhost', '5001');
 
   export default {
     name: "ipfs-uploader",
@@ -56,6 +53,8 @@
 
         axios.post(this.$hyperledgerApiUrl + 'IpfsFileReading', payLoad, this.$hyperledgerApiConfig).then((res) => {
           console.log("RESPONSE RECEIVED: ", res);
+          this.$emit('ipfsFileUploaded');
+
         }).catch((err) => {
             console.log("AXIOS ERROR: ", err);
         });

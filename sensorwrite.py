@@ -130,6 +130,7 @@ while True:
     process_note_reading = {
       "$class": "org.agrotracker.network.ProcessNoteReading",
       "processNote": note,
+      "noteTitle": note,      
       "lot": lotId
     }      
   
@@ -137,7 +138,7 @@ while True:
     post_data(base_url + 'RhReading', humidity_reading)
     post_data(base_url + 'MoistureReading', moisture_reading)
     post_data(base_url + 'LumenReading', lumen_reading)
-    #post_data(base_url + 'ProcessNoteReading', process_note_reading)
+    post_data(base_url + 'ProcessNoteReading', process_note_reading)
     #post_data(base_url + 'IpfsFileReading', ipfs_reading)
 
 

@@ -14,29 +14,36 @@
       </d-col>
     </d-row>
     <d-row>
-      <!-- Users Overview -->
+      <!-- Data Overview -->
       <d-col lg="6" md="6" sm="12" class="mb-4">
         <!-- <sensor-chart /> -->
         <sensor-chart :title="`Luminosidad (lumen)`"  :data="lumenReadings" :labels="lumenTimeStamp" v-if="lumenReadings" />
-
       </d-col>
 
-      <!-- Users by Device (lite) -->
       <d-col lg="6" md="6" sm="12" class="mb-4">
         <sensor-chart :title="`Humedad del Suelo (%)`"  :data="moistureReadings" :labels="moistureTimeStamp" v-if="moistureReadings" />
       </d-col>
     </d-row>
     <d-row>
       <d-col lg="12" md="12" sm="12" class="mb-4">
-        <ipfs-uploader :productLotId = "productLotId"/>
+        <ipfs-uploader :productLotId = "productLotId" v-on:ipfsFileUploaded="forceRerender"/>
       </d-col>
     </d-row>
-    <ipfs-table :hashArray="ipfsFileReadingsHash" :fileNameArray="ipfsFileReadingsFileName" :timestampArray="ipfsFileTimeStamp"></ipfs-table>
-
-    <!-- <span>{{asset}}</span> -->
-    <!-- <span>{{ipfsFileReadingsHash}}</span>
-    <span>{{ipfsFileReadingsFileName}}</span>
-    <span>{{ipfsFileTimeStamp}}</span> -->
+    <d-row>
+      <d-col lg="12" md="12" sm="12" class="mb-4">
+        <ipfs-table :hashArray="ipfsFileReadingsHash" :fileNameArray="ipfsFileReadingsFileName" :timestampArray="ipfsFileTimeStamp" />
+      </d-col>
+    </d-row>    
+    <d-row>
+      <d-col lg="12" md="12" sm="12" class="mb-4">
+        <process-note :productLotId="productLotId" v-on:processNoteUploaded="forceRerender"></process-note>
+      </d-col>
+    </d-row>
+    <d-row>
+      <d-col lg="12" md="12" sm="12" class="mb-4">
+        <process-note-table :titleArray="ProcessNoteReadingsTitle" :noteArray="ProcessNoteReadingsNote" :timestampArray="ProcessNoteReadingsTimeStamp"/>
+      </d-col>
+    </d-row>      
 
   </div>
 </template>
@@ -44,7 +51,10 @@
 <script>
 import SensorChart from '@/components/charts/SensorChart.vue';
 import IpfsUploader from '@/components/forms/IpfsUploader.vue';
+import ProcessNote from '@/components/forms/ProcessNote.vue';
 import IpfsTable from '@/components/tables/IpfsTable.vue';
+import ProcessNoteTable from '@/components/tables/ProcessNoteTable.vue';
+
 
 
 
@@ -53,8 +63,9 @@ export default {
   components: {
     SensorChart,
     IpfsUploader,
-    IpfsTable
-
+    IpfsTable,
+    ProcessNote,
+    ProcessNoteTable
   },
   props: {
     asset: {
@@ -67,6 +78,9 @@ export default {
     };
   },
   methods: {
+    forceRerender (event) {
+      this.$emit('dataChanged')
+    }
   },
   computed: {
     //NOTA:WE HAVE TO ENSURE THAT WE HAVE DATA IN THE BLOCKCHAIN TO SHOW THE MODULE
@@ -125,7 +139,19 @@ export default {
         let date = new Date(t);
         return date;
       });
+    },
+    ProcessNoteReadingsTitle: function () {
+      return this.asset.processNoteReadings.map(a => a.noteTitle);
+    },
+    ProcessNoteReadingsNote: function () {
+      return this.asset.processNoteReadings.map(a => a.processNote);
     },    
+    ProcessNoteReadingsTimeStamp: function () {
+      return this.asset.processNoteReadings.map(a => a.timestamp).map(t => {
+        let date = new Date(t);
+        return date;
+      });
+    },   
   },
 };
 </script>

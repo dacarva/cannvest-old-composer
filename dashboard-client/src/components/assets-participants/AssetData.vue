@@ -31,12 +31,20 @@
         <ipfs-uploader :productLotId = "productLotId"/>
       </d-col>
     </d-row>
+    <ipfs-table :hashArray="ipfsFileReadingsHash" :fileNameArray="ipfsFileReadingsFileName" :timestampArray="ipfsFileTimeStamp"></ipfs-table>
+
+    <!-- <span>{{asset}}</span> -->
+    <!-- <span>{{ipfsFileReadingsHash}}</span>
+    <span>{{ipfsFileReadingsFileName}}</span>
+    <span>{{ipfsFileTimeStamp}}</span> -->
+
   </div>
 </template>
 
 <script>
 import SensorChart from '@/components/charts/SensorChart.vue';
 import IpfsUploader from '@/components/forms/IpfsUploader.vue';
+import IpfsTable from '@/components/tables/IpfsTable.vue';
 
 
 
@@ -44,7 +52,9 @@ export default {
   name: 'asset-data',
   components: {
     SensorChart,
-    IpfsUploader
+    IpfsUploader,
+    IpfsTable
+
   },
   props: {
     asset: {
@@ -102,7 +112,20 @@ export default {
 
     productLotId: function () {
       return this.asset.lotId;
-    }
+    },
+    
+    ipfsFileReadingsHash: function () {
+      return this.asset.ipfsFileReadings.map(a => a.ipfsFile);
+    },
+    ipfsFileReadingsFileName: function () {
+      return this.asset.ipfsFileReadings.map(a => a.originalFileName);
+    },    
+    ipfsFileTimeStamp: function () {
+      return this.asset.ipfsFileReadings.map(a => a.timestamp).map(t => {
+        let date = new Date(t);
+        return date;
+      });
+    },    
   },
 };
 </script>

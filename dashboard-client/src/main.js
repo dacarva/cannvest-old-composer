@@ -30,6 +30,12 @@ Vue.prototype.$hyperledgerApiConfig = {
     'Accept' : 'application/json'
   }
 };
+Vue.prototype.$ipfs = window.IpfsHttpClient('localhost', '5001');
+Vue.prototype.$ipfsGateway = 'http://localhost:8080/ipfs/';
+
+
+
+
 
 // Vue.use(axios);
 

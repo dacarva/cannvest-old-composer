@@ -20,6 +20,58 @@ def post_data(api_url, json_data):
     print ("Success", r.status_code)
   time.sleep(20)
 
+#Create 3 extra lots:
+
+lot_2 = {
+  "$class": "org.agrotracker.network.ProductLot",
+  "lotId": "LOT_002",
+  "type": "POPPY",
+  "status": "SEEDED",
+  "unitCount": 100,
+  "temperatureReadings": [],
+  "rhReadings": [],
+  "lumenReadings": [],
+  "moistureReadings": [],
+  "ipfsFileReadings": [],
+  "processNoteReadings": [],
+  "contract": "resource:org.agrotracker.network.Contract#CON_001"
+}
+
+lot_3 = {
+  "$class": "org.agrotracker.network.ProductLot",
+  "lotId": "LOT_003",
+  "type": "POPPY",
+  "status": "SEEDED",
+  "unitCount": 1000,
+  "temperatureReadings": [],
+  "rhReadings": [],
+  "lumenReadings": [],
+  "moistureReadings": [],
+  "ipfsFileReadings": [],
+  "processNoteReadings": [],
+  "contract": "resource:org.agrotracker.network.Contract#CON_001"
+}
+
+lot_4 = {
+  "$class": "org.agrotracker.network.ProductLot",
+  "lotId": "LOT_004",
+  "type": "COCA",
+  "status": "SEEDED",
+  "unitCount": 100,
+  "temperatureReadings": [],
+  "rhReadings": [],
+  "lumenReadings": [],
+  "moistureReadings": [],
+  "ipfsFileReadings": [],
+  "processNoteReadings": [],
+  "contract": "resource:org.agrotracker.network.Contract#CON_001"
+}
+
+post_data(base_url + 'ProductLot', lot_2)
+post_data(base_url + 'ProductLot', lot_3)
+post_data(base_url + 'ProductLot', lot_4)
+
+
 while True:
 
   print("Cycle started")

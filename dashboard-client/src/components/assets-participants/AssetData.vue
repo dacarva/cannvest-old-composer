@@ -26,11 +26,17 @@
         <sensor-chart :title="`Humedad del Suelo (%)`"  :data="moistureReadings" :labels="moistureTimeStamp" v-if="moistureReadings" />
       </d-col>
     </d-row>
+    <d-row>
+      <d-col lg="12" md="12" sm="12" class="mb-4">
+        <ipfs-uploader :productLotId = "productLotId"/>
+      </d-col>
+    </d-row>
   </div>
 </template>
 
 <script>
 import SensorChart from '@/components/charts/SensorChart.vue';
+import IpfsUploader from '@/components/forms/IpfsUploader.vue';
 
 
 
@@ -38,6 +44,7 @@ export default {
   name: 'asset-data',
   components: {
     SensorChart,
+    IpfsUploader
   },
   props: {
     asset: {
@@ -91,7 +98,11 @@ export default {
         let date = new Date(t);
         return date.getTime();
       });
-    },    
+    },
+
+    productLotId: function () {
+      return this.asset.lotId;
+    }
   },
 };
 </script>

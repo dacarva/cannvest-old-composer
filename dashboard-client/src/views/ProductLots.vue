@@ -4,6 +4,8 @@
     <custom-dropdown  :options="productLotIds" v-model="selectedLotId" > </custom-dropdown>
     <asset-profile v-if="selectedLot" :asset="selectedLot"></asset-profile>
     <asset-data v-if="selectedLot" :asset="selectedLot" :key="componentKey"></asset-data>
+
+    <!-- <ipfs-uploader v-if="selectedLot" :asset="selectedLot" /> -->
   </d-container>
     
 </template>
@@ -11,7 +13,7 @@
 <script>
   import axios from 'axios';
   import CustomDropdown from '@/components/forms/CustomDropdown.vue';
-  // import IpfsUploader from '@/components/forms/IpfsUploader.vue';
+  import IpfsUploader from '@/components/forms/IpfsUploader.vue';
 
   import AssetProfile from '@/components/assets-participants/AssetProfile.vue';
   import AssetData from '@/components/assets-participants/AssetData.vue';
@@ -28,6 +30,7 @@
         productLots: [],
         selectedLotId : '',
         componentKey: 0,
+
       }
     },
     methods: {
@@ -39,6 +42,7 @@
       },
       forceRerender () {
         this.componentKey += 1;  
+        
       }
     },
     mounted () {
@@ -62,7 +66,7 @@
       CustomDropdown,
       AssetProfile,
       AssetData,
-      // IpfsUploader
+      IpfsUploader
     }
   }
 </script>

@@ -6,6 +6,8 @@ import ShardsVue from 'shards-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import '@/scss/shards-dashboards.scss';
 import '@/assets/scss/date-range.scss';
+import 'vue2-dropzone/dist/vue2Dropzone.css'
+
 
 // Core
 import App from './App.vue';
@@ -22,11 +24,14 @@ Vue.component('default-layout', Default);
 Vue.config.productionTip = false;
 Vue.prototype.$eventHub = new Vue();
 Vue.prototype.$hyperledgerApiUrl = 'http://localhost:3000/api/';
-
-
+Vue.prototype.$hyperledgerApiConfig = {
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept' : 'application/json'
+  }
+};
 
 // Vue.use(axios);
-
 
 new Vue({
   router,

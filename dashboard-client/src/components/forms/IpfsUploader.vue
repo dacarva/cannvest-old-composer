@@ -3,6 +3,8 @@
     <d-card-header></d-card-header>
     <d-card-body>
       <vue-dropzone id="drop1" :options="dropOptions" @vdropzone-file-added="vfileAdded" @vdropzone-success="vsuccess"></vue-dropzone>
+      <br>
+      <ipfs-table></ipfs-table>
     </d-card-body>
   </d-card>
 
@@ -12,6 +14,8 @@
 
   import vue2Dropzone from 'vue2-dropzone';
   import * as fileReaderPullStream from 'pull-file-reader';
+  import IpfsTable from '@/components/tables/IpfsTable.vue';
+
   // import ipfsClient from 'ipfs-http-client';
   import axios from 'axios';
 
@@ -22,7 +26,8 @@
   export default {
     name: "ipfs-uploader",
     components : {
-       vueDropzone: vue2Dropzone
+       vueDropzone: vue2Dropzone,
+       IpfsTable
     },
     data () {
       return {
@@ -39,10 +44,13 @@
     methods: {
       vfileAdded(file){},
       async vsuccess(file,response){
-        const fileStream = fileReaderPullStream(file);
-        let results = await ipfs.add(fileStream);
-        let hash = results[0].hash;
 
+        const fileName = file.name;
+        const fileStream = fileReaderPullStream(file);
+        const results = await ipfs.add(fileStream);
+        const hash = results[0].hash;
+        console.log(fileName);
+        console.log(hash);
         const payLoad = {
           "$class": "org.agrotracker.network.IpfsFileReading",
           "ipfsFile": hash,

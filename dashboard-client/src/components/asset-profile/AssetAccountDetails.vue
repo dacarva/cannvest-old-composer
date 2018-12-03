@@ -96,7 +96,7 @@
 <script>
   import axios from 'axios';
 
-  function stringAfterCharacter (string, character) {
+  function getStringAfterSubstring (string, character) {
     return string.substring(string.indexOf(character) + character.length)
   }
 
@@ -121,8 +121,8 @@
       getContractData () {
         axios.get(this.$hyperledgerApiUrl + 'Contract/' + this.selectedLotContractId).then(response => {
           this.selectedLotContract = response.data;
-          this.productLotProducerId = stringAfterCharacter(this.selectedLotContract.producer,"#");
-          this.productLotConsumerId = stringAfterCharacter(this.selectedLotContract.consumer,"#");                   
+          this.productLotProducerId = getStringAfterSubstring(this.selectedLotContract.producer,"#");
+          this.productLotConsumerId = getStringAfterSubstring(this.selectedLotContract.consumer,"#");                   
         });  
       },
       getConsumerData () {
@@ -136,9 +136,9 @@
         });  
       }      
     },
-    computed: {
+    computed: {  
       selectedLotContractId: function () {
-        return stringAfterCharacter(this.asset.contract,"#");
+        return getStringAfterSubstring(this.asset.contract,"#");
       },
     },
     created () {

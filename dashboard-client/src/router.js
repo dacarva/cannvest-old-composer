@@ -9,8 +9,11 @@ import ComponentsOverview from './views/ComponentsOverview.vue';
 import Tables from './views/Tables.vue';
 import BlogPosts from './views/BlogPosts.vue';
 import ProductLots from './views/ProductLots.vue';
-import Producers from './views/Producers.vue';
-import Consumers from './views/Consumers.vue';
+import ViewProducers from './views/ViewProducers.vue';
+import ViewConsumers from './views/ViewConsumers.vue';
+import AddConsumer from './views/AddConsumer.vue';
+import AddProducer from './views/AddProducer.vue';
+import AddProductLot from './views/AddProductLot.vue';
 
 Vue.use(Router);
 
@@ -33,14 +36,29 @@ export default new Router({
       component: ProductLots,
     },
     {
-      path: '/producers',
-      name: 'producers',
-      component: Producers,
+      path: '/view-producers',
+      name: 'view-producers',
+      component: ViewProducers,
     },
     {
-      path: '/consumers',
-      name: 'consumers',
-      component: Consumers,
+      path: '/view-consumers',
+      name: 'view-consumers',
+      component: ViewConsumers,
+    },
+    {
+      path: '/add-consumer',
+      name: 'add-consumer',
+      component: AddConsumer,
+    },
+    {
+      path: '/add-producer',
+      name: 'add-producer',
+      component: AddProducer,
+    },
+    {
+      path: '/add-product-lot',
+      name: 'add-product-lot',
+      component: AddProductLot,
     },
     {
       path: '/blog-overview',

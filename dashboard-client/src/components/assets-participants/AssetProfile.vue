@@ -14,7 +14,10 @@
         <asset-details :asset="asset"></asset-details> 
       </d-col>
       <d-col lg="8">
-        <asset-account-details :asset="asset" />
+        <asset-account-details :asset="asset" v-if="assetType === 'Lote'" />
+
+        <participant-account-details :asset="asset" v-if="assetType !== 'Lote'" v-on:participantUpdated="forceRerender"  />
+
       </d-col>
     </d-row>
   </div>
@@ -22,21 +25,54 @@
 
 <script>
 import AssetDetails from '@/components/asset-profile/AssetDetails.vue';
+import ParticipantAccountDetails from '@/components/asset-profile/ParticipantAccountDetails.vue';
 import AssetAccountDetails from '@/components/asset-profile/AssetAccountDetails.vue';
 
 
+
+function getStringAfterSubstring(parentString, substring) {
+    return parentString.substring(parentString.indexOf(substring) + substring.length)
+}
+
 export default {
   name: 'asset-profile',
-
+  data () {
+    return {
+      componentKey: 0,
+    }
+  },
   props: {
     asset: {
       type: Object,
       required: true,
     },
   },
+  methods: {
+    forceRerender () {
+      this.$emit('dataChanged')
+    }   
+  },
+  computed: {
+    assetType : function () {
+      const assetType = getStringAfterSubstring(this.asset.$class,'org.agrotracker.network.');
+      if (assetType === 'ProductLot') {
+        return 'Lote';
+      }
+      else if (assetType === 'Producer') {
+        return 'Productor';
+      }
+      else if (assetType === 'Consumer') {
+        return 'Consumidor';
+      }
+      return 'N/A';
+    }
+  },
   components: {
     AssetDetails,
+    ParticipantAccountDetails,
     AssetAccountDetails
+  },
+  mounted() {
   },
 };
 </script>

@@ -6,21 +6,14 @@
 
       <!-- Asset Avatar -->
       <div class="mb-3 mx-auto">
-        <img class="rounded-circle" :src="utils.avatar" :alt="asset.lotId" width="110">
+        <img class="rounded-circle" :src="assetAvatar" :alt="assetId" width="110">
       </div>
 
       <!-- Asset Name -->
-      <h4 class="mb-0">ID del Lote: {{ asset.lotId }}</h4>
-
-      <!-- Asset Job Title -->
-      <span class="text-muted d-block mb-2">{{ asset.jobTitle }}</span>
+      <h4 class="mb-0">ID del {{ assetType }}: {{ assetId }}</h4>
 
       <!-- Contenido del lote -->
-      <span class="text-muted d-block mb-2">Producto: {{ asset.type.toLowerCase() }}</span>
-
-
-      <!-- Asset Follow -->
-      <!-- <d-button pill outline size="sm" class="mb-2"> <i class="material-icons mr-1">person_add</i> Follow</d-button> -->
+      <span class="text-muted d-block mb-2">{{ assetDescription }}</span>
 
     </d-card-header>
 
@@ -36,12 +29,6 @@
           </d-progress>
         </div>
       </d-list-group-item>
-
-      <!-- Asset Meta -->
-      <!-- <d-list-group-item>
-        <strong class="text-muted d-block mb-2">{{ utils.metaTitle }}</strong>
-        <span>{{ utils.metaValue }}</span>
-      </d-list-group-item> -->
     </d-list-group>
 
   </d-card>
@@ -55,30 +42,78 @@ const utils = {
   metaTitle: 'Description',
   metaValue: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?',
 }
-const defaultAssetDetails = {
-  name: 'Sierra Brooks',
-  avatar: require('@/assets/images/avatars/0.jpg'),
-  jobTitle: 'Project Manager',
-  performanceReportTitle: 'Workload',
-  performanceReportValue: 74,
-  metaTitle: 'Description',
-  metaValue: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?',
-};
+
+function getStringAfterSubstring(parentString, substring) {
+    return parentString.substring(parentString.indexOf(substring) + substring.length)
+}
 
 export default {
-  name: 'asset-details',
+  name : 'asset-details',
   data () {
     return {
       utils: utils
     }
   },
-  props: {
-    asset: {
+  props : {
+    asset : {
       type: Object,
-      default() {
-        return defaultAssetDetails;
-      },
     },
+  },
+  computed : {
+    assetAvatar : function () {
+      const assetType = getStringAfterSubstring(this.asset.$class,'org.agrotracker.network.');
+      if (assetType === 'ProductLot') {
+        return require('@/assets/images/logos/hyperledger.png');
+      }
+      else if (assetType === 'Producer') {
+        return require('@/assets/images/logos/hyperledger.png');
+      }
+      else if (assetType === 'Consumer') {
+        return require('@/assets/images/logos/hyperledger.png');
+      }
+      return require('@/assets/images/logos/hyperledger.png');
+    },
+    assetId : function () {
+      const assetType = getStringAfterSubstring(this.asset.$class,'org.agrotracker.network.');
+      if (assetType === 'ProductLot') {
+        return this.asset.lotId;
+      }
+      else if (assetType === 'Producer') {
+        return this.asset.participantId;
+      }
+      else if (assetType === 'Consumer') {
+        return this.asset.participantId;
+      }
+      return 'No ID';
+    },
+    assetDescription : function () {
+      const assetType = getStringAfterSubstring(this.asset.$class,'org.agrotracker.network.');
+      if (assetType === 'ProductLot') {
+        return 'Producto: ' + this.asset.type.toLowerCase() ;
+      }
+      else if (assetType === 'Producer') {
+        return 'Productor de: ' + this.asset.address.country;
+      }
+      else if (assetType === 'Consumer') {
+        return 'Consumidor de: ' + this.asset.address.country;
+      }
+      return 'N/A';
+    },
+    assetType : function () {
+      const assetType = getStringAfterSubstring(this.asset.$class,'org.agrotracker.network.');
+      if (assetType === 'ProductLot') {
+        return 'Lote';
+      }
+      else if (assetType === 'Producer') {
+        return 'Productor';
+      }
+      else if (assetType === 'Consumer') {
+        return 'Consumidor';
+      }
+      return 'N/A';
+    }
+  },
+  mounted() {
   },
 };
 </script>

@@ -66,19 +66,9 @@
     },
     created () {
       this.getProductLots();
-
+      this.setSelectedLot();
     },
     computed: {
-      selectedLot_old : function () {
-        for (let i = 0; i < this.productLots.length; i++){
-          let lot = this.productLots[i];
-          if (lot.lotId === this.selectedLotId){
-            this.forceRerender();
-            return lot;
-          }
-        }
-        return null;
-      },
     },
     components: {
       CustomDropdown,

@@ -28,12 +28,6 @@ lot_2 = {
   "type": "POPPY",
   "status": "SEEDED",
   "unitCount": 100,
-  "temperatureReadings": [],
-  "rhReadings": [],
-  "lumenReadings": [],
-  "moistureReadings": [],
-  "ipfsFileReadings": [],
-  "processNoteReadings": [],
   "contract": "resource:org.agrotracker.network.Contract#CON_001"
 }
 
@@ -43,12 +37,6 @@ lot_3 = {
   "type": "POPPY",
   "status": "SEEDED",
   "unitCount": 1000,
-  "temperatureReadings": [],
-  "rhReadings": [],
-  "lumenReadings": [],
-  "moistureReadings": [],
-  "ipfsFileReadings": [],
-  "processNoteReadings": [],
   "contract": "resource:org.agrotracker.network.Contract#CON_001"
 }
 
@@ -58,12 +46,6 @@ lot_4 = {
   "type": "COCA",
   "status": "SEEDED",
   "unitCount": 100,
-  "temperatureReadings": [],
-  "rhReadings": [],
-  "lumenReadings": [],
-  "moistureReadings": [],
-  "ipfsFileReadings": [],
-  "processNoteReadings": [],
   "contract": "resource:org.agrotracker.network.Contract#CON_001"
 }
 

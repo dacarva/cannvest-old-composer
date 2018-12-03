@@ -1,18 +1,20 @@
 export default function () {
-  return [{
-    title: 'Blog Dashboard',
-    to: {
-      name: 'blog-overview',
-    },
-    htmlBefore: '<i class="material-icons">edit</i>',
-    htmlAfter: '',
-  }, {
-    title: 'Blog Posts',
-    htmlBefore: '<i class="material-icons">vertical_split</i>',
-    to: {
-      name: 'blog-posts',
-    },
-  },
+  return [
+  
+    // {
+  //   title: 'Blog Dashboard',
+  //   to: {
+  //     name: 'blog-overview',
+  //   },
+  //   htmlBefore: '<i class="material-icons">edit</i>',
+  //   htmlAfter: '',
+  // }, {
+  //   title: 'Blog Posts',
+  //   htmlBefore: '<i class="material-icons">vertical_split</i>',
+  //   to: {
+  //     name: 'blog-posts',
+  //   },
+  // },
   {
     title: 'Product Lots',
     htmlBefore: '<i class="material-icons">vertical_split</i>',
@@ -21,48 +23,69 @@ export default function () {
     },
   },
   {
-    title: 'Producers',
+    title: 'View Producers',
     htmlBefore: '<i class="material-icons">person</i>',
     to: {
-      name: 'producers',
+      name: 'view-producers',
     },
   },
   {
-    title: 'Consumers',
+    title: 'View Consumers',
     htmlBefore: '<i class="material-icons">person</i>',
     to: {
-      name: 'consumers',
+      name: 'view-consumers',
     },
   },
   {
-    title: 'Add New Post',
+    title: 'Add Producer',
     htmlBefore: '<i class="material-icons">note_add</i>',
     to: {
-      name: 'add-new-post',
+      name: 'add-producer',
     },
-  }, {
-    title: 'Forms & Components',
-    htmlBefore: '<i class="material-icons">view_module</i>',
+  },
+  {
+    title: 'Add Consumer',
+    htmlBefore: '<i class="material-icons">note_add</i>',
     to: {
-      name: 'components-overview',
+      name: 'add-consumer',
     },
-  }, {
-    title: 'Tables',
-    htmlBefore: '<i class="material-icons">table_chart</i>',
+  },
+  {
+    title: 'Add Product Lot',
+    htmlBefore: '<i class="material-icons">note_add</i>',
     to: {
-      name: 'tables',
+      name: 'add-product-lot',
     },
-  }, {
-    title: 'User Profile',
-    htmlBefore: '<i class="material-icons">person</i>',
-    to: {
-      name: 'user-profile-lite',
-    },
-  }, {
-    title: 'Errors',
-    htmlBefore: '<i class="material-icons">error</i>',
-    to: {
-      name: 'errors',
-    },
+  },
+  {
+  //   title: 'Add New Post',
+  //   htmlBefore: '<i class="material-icons">note_add</i>',
+  //   to: {
+  //     name: 'add-new-post',
+  //   },
+  // }, {
+  //   title: 'Forms & Components',
+  //   htmlBefore: '<i class="material-icons">view_module</i>',
+  //   to: {
+  //     name: 'components-overview',
+  //   },
+  // }, {
+  //   title: 'Tables',
+  //   htmlBefore: '<i class="material-icons">table_chart</i>',
+  //   to: {
+  //     name: 'tables',
+  //   },
+  // }, {
+  //   title: 'User Profile',
+  //   htmlBefore: '<i class="material-icons">person</i>',
+  //   to: {
+  //     name: 'user-profile-lite',
+  //   },
+  // }, {
+  //   title: 'Errors',
+  //   htmlBefore: '<i class="material-icons">error</i>',
+  //   to: {
+  //     name: 'errors',
+  //   },
   }];
 }

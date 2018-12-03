@@ -78,7 +78,7 @@ export default {
     };
   },
   methods: {
-    forceRerender (event) {
+    forceRerender () {
       this.$emit('dataChanged')
     }
   },

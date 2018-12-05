@@ -4,9 +4,8 @@
     <h4>Selección de Lote de producto</h4>
     <custom-dropdown  :options="productLotIds" v-model="selectedLotId" v-on:input="setSelectedLot"> </custom-dropdown>
     <asset-profile v-if="selectedLot" :asset="selectedLot"></asset-profile>
-    <asset-data v-if="selectedLot" :asset="selectedLot" :key="componentKey" v-on:dataChanged="setSelectedLot"></asset-data>
+    <smart-contract-details v-if="selectedLotContract" :updateNeed="false" :contract="selectedLotContract" />
 
-    <!-- <ipfs-uploader v-if="selectedLot" :asset="selectedLot" /> -->
   </d-container>
     
 </template>
@@ -14,10 +13,8 @@
 <script>
   import axios from 'axios';
   import CustomDropdown from '@/components/forms/CustomDropdown.vue';
-  import IpfsUploader from '@/components/forms/IpfsUploader.vue';
-
   import AssetProfile from '@/components/assets-participants/AssetProfile.vue';
-  import AssetData from '@/components/assets-participants/AssetData.vue';
+  import SmartContractDetails from '@/components/asset-profile/SmartContractDetails.vue';
 
 
   function stringAfterCharacter (string, character) {
@@ -31,7 +28,8 @@
         productLots: [],
         selectedLotId : '',
         componentKey: 0,
-        selectedLot: null
+        selectedLot: null,
+        selectedLotContract : null,
       }
     },
     methods: {
@@ -48,16 +46,26 @@
             let lot = this.productLots[i];
             if (lot.lotId === this.selectedLotId){
               this.selectedLot = lot;
+              this.getSelectedLotContract();
+              break;
             }
           } 
         }
         else {
           axios.get(this.$hyperledgerApiUrl + 'ProductLot/' + this.selectedLotId).then(response => {
             this.selectedLot = response.data;
+            this.getSelectedLotContract();
           });
-          console.log(this.selectedLot)
         }
         this.forceRerender();
+      },
+      getSelectedLotContract () {
+        const contractId = stringAfterCharacter(this.selectedLot.contract,'#');
+        axios.get(this.$hyperledgerApiUrl + 'Contract/' + contractId).then(response => {
+          console.log(response);
+          this.selectedLotContract = response.data;
+          console.log('Selected lot contract',this.selectedLotContract);
+        });        
       },
       forceRerender () {
         this.componentKey += 1;
@@ -74,8 +82,7 @@
     components: {
       CustomDropdown,
       AssetProfile,
-      AssetData,
-      IpfsUploader
+      SmartContractDetails
     }
   }
 </script>

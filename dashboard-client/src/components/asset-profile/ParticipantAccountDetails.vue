@@ -18,23 +18,26 @@
                   <label>ID del {{ assetType }}</label>
                   <d-form-input type="text" v-bind:placeholder="'ID del' + assetType" v-bind:value="assetId" readonly/>
                 </d-col>
+                <d-col md="6" class="form-group">
+                  <label>Nombre del {{ assetType }}</label>
+                  <d-form-input type="text" v-bind:placeholder="'Nombre del' + assetType" v-bind:value="asset.name" readonly />
+                </d-col>                     
 
               </d-form-row>
 
               <d-form-row>
                 <!-- Detalles del productor o Consumidor -->
                 <d-col md="6" class="form-group">
-                  <label>Nombre del {{ assetType }}</label>
-                  <d-form-input type="text" v-bind:placeholder="'Nombre del' + assetType" v-bind:value="assetId" readonly />
-
-                </d-col>                  
+                  <label>Correo electrónico del {{ assetType }}</label>
+                  <d-form-input type="email" v-bind:value="asset.email" readonly />
+                </d-col>                 
 
                 <!-- Correo del productor o consumidor -->
 
                 <d-col md="6" class="form-group">
-                  <label>Correo electrónico del {{ assetType }}</label>
-                  <d-form-input type="email" v-bind:value="asset.email" readonly />
-                </d-col>    
+                  <label>Pais del {{ assetType }}</label>
+                  <d-form-input type="text" v-bind:value="asset.address.country" readonly />                  
+                </d-col>       
               </d-form-row>
 
               <!-- Address -->
@@ -42,8 +45,8 @@
               <d-form-row>
 
                 <d-col md="6" class="form-group">
-                  <label>Pais del {{ assetType }}</label>
-                  <d-form-input type="text" v-bind:value="asset.address.country" readonly />                  
+                  <label>Balance de cuenta del {{ assetType }} ($)</label>
+                  <d-form-input type="number" v-bind:value="asset.accountBalance" readonly />                  
                 </d-col>   
 
                 <d-col md="6" class="form-group">
@@ -59,7 +62,12 @@
                 <!-- Detalles del productor o Consumidor -->
                 <d-col md="6" class="form-group">
                   <label>Actualización del país del {{ assetType }}</label>
-                  <d-form-input type="text" v-bind:state="countryState" placeholder="País" v-model="updatedParticipantData.country"  />                  
+                  <!-- <d-form-input type="text" v-bind:state="countryState" placeholder="País" v-model="updatedParticipantData.country"  />                  
+                  <d-form-invalid-feedback v-if="countryState === 'invalid'">Por favor escriba una código de país válido</d-form-invalid-feedback> -->
+
+                  <d-select v-model="updatedParticipantData.country" v-bind:state="countryState"  required>
+                    <option v-for="(country, index) in $countryCodes" :key="index" :value="index">{{country}}</option>
+                  </d-select>
                   <d-form-invalid-feedback v-if="countryState === 'invalid'">Por favor escriba una código de país válido</d-form-invalid-feedback>
 
                 </d-col>                  
@@ -137,6 +145,7 @@
           "$class": this.asset.$class,
           "accountBalance": this.asset.accountBalance,
           "validLicense": this.asset.validLicense,
+          "name" : this.asset.name,
           "email": this.asset.email,
           "address" : {
             "$class": "org.agrotracker.network.Address",
@@ -184,6 +193,7 @@
         const endPoint = this.$hyperledgerApiUrl + assetType + '/' + this.asset.participantId;
         axios.put(endPoint, payLoad, this.$hyperledgerApiConfig).then((res) => {
           console.log("RESPONSE RECEIVED: ", res);
+          alert('El participante se ha modificado satisfactoriamente');
           this.$emit('participantUpdated');
         }).catch((err) => {
             console.log("AXIOS ERROR: ", err);

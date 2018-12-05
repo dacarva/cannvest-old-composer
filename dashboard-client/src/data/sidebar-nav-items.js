@@ -37,6 +37,13 @@ export default function () {
     },
   },
   {
+    title: 'View Smart Contracts',
+    htmlBefore: '<i class="material-icons">description</i>',
+    to: {
+      name: 'view-smart-contracts',
+    },
+  },  
+  {
     title: 'Add Producer',
     htmlBefore: '<i class="material-icons">note_add</i>',
     to: {
@@ -57,6 +64,20 @@ export default function () {
       name: 'add-product-lot',
     },
   },
+  {
+    title: 'Add Smart Contract',
+    htmlBefore: '<i class="material-icons">note_add</i>',
+    to: {
+      name: 'add-smart-contract',
+    },
+  },  
+  {
+    title: 'Transacciones',
+    htmlBefore: '<i class="material-icons">transform</i>',
+    to: {
+      name: 'execute-transactions',
+    },
+  },  
   {
   //   title: 'Add New Post',
   //   htmlBefore: '<i class="material-icons">note_add</i>',

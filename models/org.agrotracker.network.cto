@@ -58,6 +58,7 @@ concept Address {
 abstract participant Business identified by participantId {
   o String email
   o String participantId 
+  o String name
   o Address address
 }
 

@@ -13,6 +13,8 @@ import 'vue2-dropzone/dist/vue2Dropzone.css'
 import App from './App.vue';
 import router from './router';
 
+import countryCodes from '@/countryCodes.js';
+
 // Layouts
 import Default from '@/layouts/Default.vue';
 
@@ -31,6 +33,7 @@ Vue.prototype.$hyperledgerApiConfig = {
 };
 Vue.prototype.$ipfs = window.IpfsHttpClient('localhost', '5001');
 Vue.prototype.$ipfsGateway = 'http://localhost:8080/ipfs/';
+Vue.prototype.$countryCodes = countryCodes;
 
 new Vue({
   router,

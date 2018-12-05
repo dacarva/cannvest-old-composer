@@ -1,17 +1,14 @@
 <template>
   <d-container fluid class="main-content-container px-4">
-    <h1>Agregar un nuevo productor</h1>
-
-    <add-participant-form :key="componentKey" :participantType="'Producer'" v-on:participantAdded="forceRerender"/>
-
+    <h1>Agregar un nuevo contrato</h1>
+    <add-smart-contract-form :key="componentKey" v-on:contractAdded="forceRerender"/>
   </d-container>
 </template>
 
 <script>
-  import AddParticipantForm from '@/components/forms/AddParticipantForm.vue'
-
+  import AddSmartContractForm from '@/components/forms/AddSmartContractForm.vue'
   export default {
-    name: 'add-producer',
+    name: 'add-smart-contract',
     data () {
       return {
         componentKey : 0,
@@ -23,7 +20,7 @@
       }
     },
     components: {
-      AddParticipantForm,
+      AddSmartContractForm      
     }
   }
 </script>

@@ -11,9 +11,13 @@ import BlogPosts from './views/BlogPosts.vue';
 import ProductLots from './views/ProductLots.vue';
 import ViewProducers from './views/ViewProducers.vue';
 import ViewConsumers from './views/ViewConsumers.vue';
+import ViewSmartContracts from './views/ViewSmartContracts.vue';
 import AddConsumer from './views/AddConsumer.vue';
 import AddProducer from './views/AddProducer.vue';
 import AddProductLot from './views/AddProductLot.vue';
+import AddSmartContract from './views/AddSmartContract.vue';
+import ExecuteTransactions from './views/ExecuteTransactions.vue';
+
 
 Vue.use(Router);
 
@@ -46,6 +50,11 @@ export default new Router({
       component: ViewConsumers,
     },
     {
+      path: '/view-smart-contracts',
+      name: 'view-smart-contracts',
+      component: ViewSmartContracts,
+    },
+    {
       path: '/add-consumer',
       name: 'add-consumer',
       component: AddConsumer,
@@ -60,6 +69,16 @@ export default new Router({
       name: 'add-product-lot',
       component: AddProductLot,
     },
+    {
+      path: '/add-smart-contract',
+      name: 'add-smart-contract',
+      component: AddSmartContract,
+    },    
+    {
+      path: '/execute-transactions',
+      name: 'execute-transactions',
+      component: ExecuteTransactions,
+    },    
     {
       path: '/blog-overview',
       name: 'blog-overview',

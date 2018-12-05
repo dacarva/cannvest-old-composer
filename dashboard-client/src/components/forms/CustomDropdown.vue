@@ -1,7 +1,7 @@
 <template>
   <d-card class="card-small mb-4 pt-3">
     <d-card-body>
-      <label for="component-dropdown">Selección de lote de producto: </label>
+      <label for="component-dropdown"></label>
       <br>
       <select
         v-model="selectedOption"

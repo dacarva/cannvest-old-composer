@@ -2,7 +2,7 @@
   <d-container fluid class="main-content-container px-4">
     <h1>Agregar un nuevo consumidor</h1>
 
-    <add-participant-form :key="componentKey" :participantType="'Consumer'" v-on:productLotAdded="forceRerender"/>
+    <add-participant-form :key="componentKey" :participantType="'Consumer'" v-on:participantAdded="forceRerender"/>
 
   </d-container>
 </template>

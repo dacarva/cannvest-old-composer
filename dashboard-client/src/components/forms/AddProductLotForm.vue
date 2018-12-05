@@ -48,6 +48,12 @@
                 <d-col md="6" class="form-group">
                   <!-- <label>ID del contrato</label> //COMPLETAR
                   <d-input type="text" placeholder="ID del contrato" required/>   -->
+                  <label>ID del contrato</label>
+                  <d-select required v-model="contractId">
+                    <option v-for="(contract, index) in existingContractIds" :key="index">
+                        {{ contract }}
+                    </option>
+                  </d-select>
                 </d-col>
                 <d-col md="6">
                 </d-col>
@@ -84,9 +90,20 @@
         selectedStage : null,
         productLotUnits : null,
         existingLotIds : null,
+        existingContractIds : null,
+        contractId : null,
       }
     },
     methods: {
+      getContracts () {
+        const endPoint = this.$hyperledgerApiUrl + 'Contract';
+        axios.get(endPoint).then((res) => {
+          // console.log("RESPONSE RECEIVED: ", res);
+          this.existingContractIds = Array.from(res.data.map(a => a.contractId)); 
+          }).catch((err) => {
+              console.log("AXIOS ERROR: ", err);
+          });         
+      },
       handleAddLot () {
         axios.get(this.$hyperledgerApiUrl + 'ProductLot').then(response => {
           console.log(response);
@@ -118,7 +135,7 @@
         return null;
       },
       writeOnBlockchain() {
-        console.log(this.payLoad);
+        // console.log(this.payLoad);
         const endPoint = this.$hyperledgerApiUrl + 'ProductLot';
         axios.post(endPoint, this.payLoad, this.$hyperledgerApiConfig).then((res) => {
           console.log("RESPONSE RECEIVED: ", res);
@@ -143,7 +160,7 @@
           "type": this.productType[this.selectedType],
           "status": this.productionStage[this.selectedStage],
           "unitCount": 100,
-          "contract": "resource:org.agrotracker.network.Contract#CON_001" //BY DEFAULT
+          "contract" : this.contractId
         }
       },
       productLotIdState: function () {
@@ -153,6 +170,9 @@
         return this.checkValidState(this.productLotUnits);
       },
     },
+    created () {
+      this.getContracts()
+    }
   }
 </script>
 

@@ -1,6 +1,8 @@
 <template>
 
   <d-container fluid class="main-content-container px-4">
+    <h4>Selección de Consumidor</h4>
+
     <custom-dropdown  :options="consumerIds" v-model="selectedConsumerId" v-on:input="setSelectedConsumer"> </custom-dropdown>
     <asset-profile v-if="selectedConsumer" :asset="selectedConsumer" :key="componentKey" v-on:dataChanged="setSelectedConsumer"></asset-profile>
   </d-container>

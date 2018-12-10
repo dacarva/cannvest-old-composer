@@ -25,6 +25,8 @@ Vue.component('default-layout', Default);
 Vue.config.productionTip = false;
 Vue.prototype.$eventHub = new Vue();
 Vue.prototype.$hyperledgerApiUrl = 'http://localhost:3000/api/';
+// Vue.prototype.$hyperledgerApiUrl = 'http://740c4ab2.ngrok.io/api/';
+
 Vue.prototype.$hyperledgerApiConfig = {
   headers: {
     'Content-Type': 'application/json',

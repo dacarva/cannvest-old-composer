@@ -5,7 +5,7 @@
     <custom-dropdown  :options="productLotIds" v-model="selectedLotId" v-on:input="setSelectedLot"> </custom-dropdown>
     <asset-profile v-if="selectedLot" :asset="selectedLot"></asset-profile>
     <smart-contract-details v-if="selectedLotContract" :updateNeed="false" :contract="selectedLotContract" />
-
+    <product-lot-received-transaction v-if="selectedLot && selectedLotContract" :key="componentKey" v-on:transactionExecuted="forceRerender"  :selectedLot="selectedLot" :contract="selectedLotContract"/>
   </d-container>
     
 </template>
@@ -15,7 +15,7 @@
   import CustomDropdown from '@/components/forms/CustomDropdown.vue';
   import AssetProfile from '@/components/assets-participants/AssetProfile.vue';
   import SmartContractDetails from '@/components/asset-profile/SmartContractDetails.vue';
-
+  import ProductLotReceivedTransaction from '@/components/transactions/ProductLotReceivedTransaction.vue';
 
   function stringAfterCharacter (string, character) {
     return string.substring(string.indexOf(character) + character.length)
@@ -62,9 +62,8 @@
       getSelectedLotContract () {
         const contractId = stringAfterCharacter(this.selectedLot.contract,'#');
         axios.get(this.$hyperledgerApiUrl + 'Contract/' + contractId).then(response => {
-          console.log(response);
+          // console.log(response);
           this.selectedLotContract = response.data;
-          console.log('Selected lot contract',this.selectedLotContract);
         });        
       },
       forceRerender () {
@@ -82,7 +81,8 @@
     components: {
       CustomDropdown,
       AssetProfile,
-      SmartContractDetails
+      SmartContractDetails,
+      ProductLotReceivedTransaction
     }
-  }
+  };
 </script>

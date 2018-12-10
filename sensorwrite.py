@@ -18,40 +18,40 @@ def post_data(api_url, json_data):
     print ("Error:", r.status_code)
   else:
     print ("Success", r.status_code)
-  time.sleep(20)
+  time.sleep(10)
 
 #Create 3 extra lots:
 
 lot_2 = {
   "$class": "org.agrotracker.network.ProductLot",
-  "lotId": "LOT_002",
+  "lotId": "LOT-002",
   "type": "POPPY",
   "status": "SEEDED",
   "unitCount": 100,
-  "contract": "resource:org.agrotracker.network.Contract#CON_001"
+  "contract": "resource:org.agrotracker.network.Contract#CON-001"
 }
 
 lot_3 = {
   "$class": "org.agrotracker.network.ProductLot",
-  "lotId": "LOT_003",
+  "lotId": "LOT-003",
   "type": "POPPY",
   "status": "SEEDED",
   "unitCount": 1000,
-  "contract": "resource:org.agrotracker.network.Contract#CON_001"
+  "contract": "resource:org.agrotracker.network.Contract#CON-001"
 }
 
 lot_4 = {
   "$class": "org.agrotracker.network.ProductLot",
-  "lotId": "LOT_004",
+  "lotId": "LOT-004",
   "type": "COCA",
   "status": "SEEDED",
   "unitCount": 100,
-  "contract": "resource:org.agrotracker.network.Contract#CON_001"
+  "contract": "resource:org.agrotracker.network.Contract#CON-001"
 }
 
-post_data(base_url + 'ProductLot', lot_2)
-post_data(base_url + 'ProductLot', lot_3)
-post_data(base_url + 'ProductLot', lot_4)
+# post_data(base_url + 'ProductLot', lot_2)
+# post_data(base_url + 'ProductLot', lot_3)
+# post_data(base_url + 'ProductLot', lot_4)
 
 
 while True:
@@ -66,8 +66,8 @@ while True:
   ipfs = 'Qmxx' + str(random.randint(1,100))
   note = 'ABC' + str(random.randint(1,100))
   
-  for lot in range(1,5):
-    print("Cycle started for LOT_00" + str(lot) )
+  for lot in range(1,2):
+    print("Cycle started for LOT-00" + str(lot) )
 
     #Get dummy sensor data
     temperature = random.randint(25,30)
@@ -77,7 +77,7 @@ while True:
     ipfs = 'Qmxx' + str(random.randint(1,100))
     note = 'ABC' + str(random.randint(1,100))
 
-    lotId = 'org.agrotracker.network.ProductLot#LOT_00' + str(lot)
+    lotId = 'org.agrotracker.network.ProductLot#LOT-00' + str(lot)
     #Create JSON objects for each reading
     temperature_reading = {
       "$class": "org.agrotracker.network.TemperatureReading",
@@ -120,7 +120,7 @@ while True:
     post_data(base_url + 'RhReading', humidity_reading)
     post_data(base_url + 'MoistureReading', moisture_reading)
     post_data(base_url + 'LumenReading', lumen_reading)
-    post_data(base_url + 'ProcessNoteReading', process_note_reading)
+    # post_data(base_url + 'ProcessNoteReading', process_note_reading)
     #post_data(base_url + 'IpfsFileReading', ipfs_reading)
 
 

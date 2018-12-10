@@ -15,71 +15,71 @@ export default function () {
   //     name: 'blog-posts',
   //   },
   // },
-  {
-    title: 'Product Lots',
-    htmlBefore: '<i class="material-icons">vertical_split</i>',
-    to: {
-      name: 'product-lots',
+    {
+      title: 'Ver Lotes de Productos',
+      htmlBefore: '<i class="material-icons">vertical_split</i>',
+      to: {
+        name: 'product-lots',
+      },
     },
-  },
-  {
-    title: 'View Producers',
-    htmlBefore: '<i class="material-icons">person</i>',
-    to: {
-      name: 'view-producers',
+    {
+      title: 'Ver Productores',
+      htmlBefore: '<i class="material-icons">person</i>',
+      to: {
+        name: 'view-producers',
+      },
     },
-  },
-  {
-    title: 'View Consumers',
-    htmlBefore: '<i class="material-icons">person</i>',
-    to: {
-      name: 'view-consumers',
+    {
+      title: 'Ver Consumidores',
+      htmlBefore: '<i class="material-icons">person</i>',
+      to: {
+        name: 'view-consumers',
+      },
     },
-  },
-  {
-    title: 'View Smart Contracts',
-    htmlBefore: '<i class="material-icons">description</i>',
-    to: {
-      name: 'view-smart-contracts',
+    {
+      title: 'Ver Contratos',
+      htmlBefore: '<i class="material-icons">description</i>',
+      to: {
+        name: 'view-smart-contracts',
+      },
     },
-  },  
-  {
-    title: 'Add Producer',
-    htmlBefore: '<i class="material-icons">note_add</i>',
-    to: {
-      name: 'add-producer',
+    {
+      title: 'Agregar Productor',
+      htmlBefore: '<i class="material-icons">note_add</i>',
+      to: {
+        name: 'add-producer',
+      },
     },
-  },
-  {
-    title: 'Add Consumer',
-    htmlBefore: '<i class="material-icons">note_add</i>',
-    to: {
-      name: 'add-consumer',
+    {
+      title: 'Agregar Consumidor',
+      htmlBefore: '<i class="material-icons">note_add</i>',
+      to: {
+        name: 'add-consumer',
+      },
     },
-  },
-  {
-    title: 'Add Product Lot',
-    htmlBefore: '<i class="material-icons">note_add</i>',
-    to: {
-      name: 'add-product-lot',
+    {
+      title: 'Agregar Lote de Producto',
+      htmlBefore: '<i class="material-icons">note_add</i>',
+      to: {
+        name: 'add-product-lot',
+      },
     },
-  },
-  {
-    title: 'Add Smart Contract',
-    htmlBefore: '<i class="material-icons">note_add</i>',
-    to: {
-      name: 'add-smart-contract',
+    {
+      title: 'Agregar Contratos',
+      htmlBefore: '<i class="material-icons">note_add</i>',
+      to: {
+        name: 'add-smart-contract',
+      },
     },
-  },  
-  {
-    title: 'Transacciones',
-    htmlBefore: '<i class="material-icons">transform</i>',
-    to: {
-      name: 'execute-transactions',
+    {
+      title: 'Transacciones',
+      htmlBefore: '<i class="material-icons">transform</i>',
+      to: {
+        name: 'execute-transactions',
+      },
     },
-  },  
-  {
-  //   title: 'Add New Post',
+  // {
+  //   title: 'Agregar New Post',
   //   htmlBefore: '<i class="material-icons">note_add</i>',
   //   to: {
   //     name: 'add-new-post',
@@ -108,5 +108,6 @@ export default function () {
   //   to: {
   //     name: 'errors',
   //   },
-  }];
+  // }
+  ];
 }

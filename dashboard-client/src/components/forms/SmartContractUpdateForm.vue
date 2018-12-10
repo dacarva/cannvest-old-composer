@@ -4,7 +4,7 @@
     <d-form-row>
       <d-col md="6" class="form-group">
         <label>Precio unitario base actualizado</label>
-        <d-input type="number" min="0" placeholder="Precio unitario" v-model="updatedContractData.unitPrice" v-bind:state="unitPriceState" />
+        <d-input type="number" min="0" step="0.1" placeholder="Precio unitario" v-model="updatedContractData.unitPrice" v-bind:state="unitPriceState" />
       </d-col>             
       <d-col md="6" class="form-group">
         <label>Día de llegada actualizado</label>
@@ -14,21 +14,21 @@
     <d-form-row>
       <d-col md="6" class="form-group">
           <label>Temperatura Mínima Permitida actualizada</label>
-          <d-form-input type="number" placeholder="Temperatura Mínima Permitida" v-model="updatedContractData.minTemperature" v-bind:state="minTemperatureState" />                  
+          <d-form-input type="number" step="0.1" placeholder="Temperatura Mínima Permitida" v-model="updatedContractData.minTemperature" v-bind:state="minTemperatureState" />                  
       </d-col>
       <d-col md="6" class="form-group">
           <label>Temperatura Máxima Permitida actualizada</label>
-          <d-form-input type="number" placeholder="Temperatura Máxima Permitida" v-model="updatedContractData.maxTemperature" v-bind:state="maxTemperatureState" />                  
+          <d-form-input type="number" step="0.1" placeholder="Temperatura Máxima Permitida" v-model="updatedContractData.maxTemperature" v-bind:state="maxTemperatureState" />                  
       </d-col>
     </d-form-row>
     <d-form-row>
       <d-col md="6" class="form-group">
           <label>Factor de Penalidad para Temperatura Mínima actualizado</label>
-          <d-form-input type="number" placeholder="Factor de Penalidad para Temperatura Mínima" v-model="updatedContractData.minPenaltyFactor" min="0" v-bind:state="minPenaltyFactorState" />            
+          <d-form-input type="number" step="0.1" placeholder="Factor de Penalidad para Temperatura Mínima" v-model="updatedContractData.minPenaltyFactor" min="0" v-bind:state="minPenaltyFactorState" />            
       </d-col>
       <d-col md="6" class="form-group">
           <label>Factor de Penalidad para Temperatura Máxima actualizado</label>
-          <d-form-input type="number" placeholder="Factor de Penalidad para Temperatura Máxima" v-model="updatedContractData.maxPenaltyFactor" min="0" v-bind:state="maxPenaltyFactorState" />               
+          <d-form-input type="number" step="0.1" placeholder="Factor de Penalidad para Temperatura Máxima" v-model="updatedContractData.maxPenaltyFactor" min="0" v-bind:state="maxPenaltyFactorState" />               
       </d-col>
     </d-form-row>
     <d-form-row>

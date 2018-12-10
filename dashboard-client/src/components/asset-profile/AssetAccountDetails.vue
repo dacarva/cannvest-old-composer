@@ -12,76 +12,68 @@
           <d-col>
             <d-form>
               <d-form-row>
-
                 <!-- Lot ID -->
                 <d-col md="6" class="form-group">
-                  <label for="assetId">ID del Lote</label>
-                  <d-form-input type="text" id="assetId" placeholder="ID del Lote" v-bind:value="asset.lotId" readonly/>
+                  <label>ID del Lote</label>
+                  <d-form-input type="text" placeholder="ID del Lote" v-bind:value="asset.lotId" readonly/>
                 </d-col>
 
                 <!-- Product Type -->
                 <d-col md="6" class="form-group">
-                  <label for="assetProductType">Tipo de producto</label>
-                  <d-form-input type="text" id="assetProductType" placeholder="Tipo de producto"  v-bind:value="asset.type" readonly/>
+                  <label>Tipo de producto</label>
+                  <d-form-input type="text" placeholder="Tipo de producto"  v-bind:value="productType[asset.type]" readonly/>
+                </d-col>
+              </d-form-row>
+              <d-form-row>
+                <!-- Lot ID -->
+                <d-col md="6" class="form-group">
+                  <label>Número de unidades</label>
+                  <d-form-input type="text" placeholder="Número de unidades" v-bind:value="asset.unitCount" readonly/>
                 </d-col>
 
-              </d-form-row>
+                <!-- Product Type -->
+                <d-col md="6" class="form-group">
+                  <label>Estado de producción</label>
+                  <d-form-input type="text" placeholder="Tipo de producto"  v-bind:value="productionStage[asset.status]" readonly/>
+                </d-col>
+              </d-form-row>              
 
               <d-form-row>
                 <!-- Detalles del productor -->
                 <!-- Productor -->
                 <d-col md="6" class="form-group">
-                  <label for="assetProducer">Nombre del Productor</label>
-                  <d-form-input type="email" id="assetProducer" placeholder="Nombre del Productor" v-bind:value="productLotProducerId" readonly />
+                  <label for="assetProducer">ID del Productor</label>
+                  <d-form-input type="email" placeholder="ID del Productor" v-bind:value="productLotProducerId" readonly />
                 </d-col>
 
-                <!-- Password -->
+                <d-col md="6" class="form-group">
+                  <label for="assetProducer">Nombre del Productor</label>
+                  <d-form-input type="email" placeholder="Nombre del Productor" v-bind:value="productLotProducerId" readonly />
+                </d-col>
+              </d-form-row>
+
+              <d-form-row>
                 <d-col md="6" class="form-group">
                   <label for="producerEmail">Correo electrónico del Productor</label>
-                  <d-form-input type="email" id="producerEmail" placeholder="Email del Productor" v-bind:value="productLotProducer.email" readonly />
+                  <d-form-input type="email" placeholder="Email del Productor" v-bind:value="productLotProducer.email" readonly />
                 </d-col>
-
+                <d-col md="6" class="form-group">
+                  <label for="producerCountry">País del Productor</label>
+                  <d-form-input type="text" placeholder="País del Productor" v-bind:value="productLotProducer.address.country" readonly />              
+                </d-col>                    
               </d-form-row>
 
               <!-- Address -->
 
               <d-form-row>
-                <d-col md="6" class="form-group">
-                  <label for="producerCountry">País del Productor</label>
-                  <d-form-input type="text" id="producerCountry" placeholder="País del Productor" v-bind:value="productLotProducer.address.country" readonly />              
-                </d-col>    
+
                 <d-col md="6" class="form-group">
                   <label>Estado de licencia</label>
                   <br>
-                  <d-button theme="success" class="mb-2 mr-1" id="" v-if="productLotProducer.validLicense">Activa</d-button>
-                  <d-button theme="danger" class="mb-2 mr-1" id="" v-if="!productLotProducer.validLicense">Inactiva</d-button>
-                  
+                  <d-button theme="success" class="mb-2 mr-1"  v-if="productLotProducer.validLicense">Activa</d-button>
+                  <d-button theme="danger" class="mb-2 mr-1"  v-if="!productLotProducer.validLicense">Inactiva</d-button>
                 </d-col>          
               </d-form-row>
-
-              <!-- <d-form-row> -->
-                <!-- City -->
-                <!-- <d-col md="6" class="form-group">
-                  <label for="feInputCity">City</label>
-                  <d-form-input type="text" id="feInputCity" />
-                </d-col> -->
-
-                <!-- State -->
-                <!-- <d-col md="4" class="form-group">
-                  <label for="feInputState">State</label>
-                  <d-select :value="null" id="feInputState">
-                    <option :value="null" selected>Choose...</option>
-                    <option>...</option>
-                  </d-select>
-                </d-col> -->
-
-                <!-- Zip Code -->
-                <!-- <d-col md="2"  class="form-group">
-                  <label for="inputZip">Zip</label>
-                  <input type="text" class="form-control" id="inputZip">
-                </d-col> -->
-
-              <!-- </d-form-row> -->
             </d-form>
           </d-col>
         </d-row>
@@ -109,6 +101,16 @@
         productLotConsumerId: '',
         productLotConsumer: null,
         productLotProducer: null,
+        productionStage : {
+          'SEEDED' : 'SEMBRADO',
+          'HARVESTED' : 'COSECHADO',
+          'DELIVERED' : 'ENTREGADO'
+        },
+        productType : {
+          'CANNABIS' : 'CANNABIS',
+          'COCA' : 'COCA',
+          'POPPY' : 'AMAPOLA'
+        },        
       }
     },
     props: {

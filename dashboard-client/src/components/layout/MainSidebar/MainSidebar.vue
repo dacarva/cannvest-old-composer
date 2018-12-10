@@ -1,5 +1,5 @@
 <template>
-  <aside :class="['main-sidebar', 'col-12', 'col-md-3', 'col-lg-2', 'px-0', sidebarVisible ? 'open' : '']">
+  <aside :class="['main-sidebar', 'col-12', 'col-md-3', 'col-lg-3', 'px-0', sidebarVisible ? 'open' : '']">
       <div class="main-navbar">
         <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
           <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">

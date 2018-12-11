@@ -32,7 +32,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/blog-overview',
+      redirect: '/product-lots',
     },
     {
       path: '/product-lots',

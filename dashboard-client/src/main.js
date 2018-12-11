@@ -24,8 +24,8 @@ Vue.component('default-layout', Default);
 
 Vue.config.productionTip = false;
 Vue.prototype.$eventHub = new Vue();
-Vue.prototype.$hyperledgerApiUrl = 'http://localhost:3000/api/';
-// Vue.prototype.$hyperledgerApiUrl = 'http://740c4ab2.ngrok.io/api/';
+// Vue.prototype.$hyperledgerApiUrl = 'http://localhost:3000/api/';
+Vue.prototype.$hyperledgerApiUrl = 'http://35.226.96.132/api/';
 
 Vue.prototype.$hyperledgerApiConfig = {
   headers: {

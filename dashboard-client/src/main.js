@@ -24,8 +24,8 @@ Vue.component('default-layout', Default);
 
 Vue.config.productionTip = false;
 Vue.prototype.$eventHub = new Vue();
-// Vue.prototype.$hyperledgerApiUrl = 'http://localhost:3000/api/';
-Vue.prototype.$hyperledgerApiUrl = 'http://35.226.96.132/api/';
+Vue.prototype.$hyperledgerApiUrl = 'http://localhost:3000/api/';
+// Vue.prototype.$hyperledgerApiUrl = 'http://35.226.96.132/api/';
 
 Vue.prototype.$hyperledgerApiConfig = {
   headers: {
@@ -33,8 +33,14 @@ Vue.prototype.$hyperledgerApiConfig = {
     'Accept' : 'application/json'
   }
 };
+
+// Testing INFURA
 Vue.prototype.$ipfs = window.IpfsHttpClient('localhost', '5001');
 Vue.prototype.$ipfsGateway = 'http://localhost:8080/ipfs/';
+
+// Vue.prototype.$ipfs = window.IpfsHttpClient('ipfs.infura.io', '5001');
+// Vue.prototype.$ipfsGateway = 'https://ipfs.infura.io/ipfs/';
+
 Vue.prototype.$countryCodes = countryCodes;
 
 new Vue({

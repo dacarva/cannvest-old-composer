@@ -1,0 +1,209 @@
+================================================================================
+==== Node Report ===============================================================
+
+Event: exception, location: "OnUncaughtException"
+Filename: node-report.20190731.104625.4745.001.txt
+Dump event time:  2019/07/31 10:46:25
+Module load time: 2019/07/31 10:46:25
+Process ID: 4745
+Command line: node /Users/davidcarvajal/.nvm/versions/node/v8.12.0/bin/composer archive list -a agrotracker-network
+
+Node.js version: v8.12.0
+(http_parser: 2.8.0, v8: 6.2.414.66, uv: 1.19.2, zlib: 1.2.11, ares: 1.10.1-DEV,
+ modules: 57, nghttp2: 1.32.0, napi: 3, openssl: 1.0.2p, icu: 60.1, unicode: 10.0,
+ cldr: 32.0, tz: 2017c)
+
+node-report version: 2.2.1 (built against Node.js v8.12.0, 64 bit)
+
+OS version: Darwin 18.6.0 Darwin Kernel Version 18.6.0: Thu Apr 25 23:16:27 PDT 2019; root:xnu-4903.261.4~2/RELEASE_X86_64
+
+Machine: MacBook-Pro-de-David-427.local x86_64
+
+================================================================================
+==== JavaScript Stack Trace ====================================================
+
+Object.parseArgs [as _parseArgs] (/Users/davidcarvajal/.nvm/versions/node/v8.12.0/lib/node_modules/composer-cli/node_modules/yargs/yargs.js:1:1)
+Object.get [as argv] (/Users/davidcarvajal/.nvm/versions/node/v8.12.0/lib/node_modules/composer-cli/node_modules/yargs/yargs.js:1:1)
+Object.<anonymous> (/Users/davidcarvajal/.nvm/versions/node/v8.12.0/lib/node_modules/composer-cli/cli.js:1:1)
+Module._compile (module.js:1:1)
+Object.Module._extensions..js (module.js:1:1)
+Module.load (module.js:1:1)
+tryModuleLoad (module.js:1:1)
+Function.Module._load (module.js:1:1)
+Function.Module.runMain (module.js:1:1)
+startup (bootstrap_node.js:1:1)
+bootstrap_node.js:1:1
+
+================================================================================
+==== Native Stack Trace ========================================================
+
+ 0: [pc=0x1022d360d] nodereport::OnUncaughtException(v8::Isolate*) [/Users/davidcarvajal/.nvm/versions/node/v8.12.0/lib/node_modules/composer-cli/node_modules/node-report/api.node]
+ 1: [pc=0x1005c5d93] v8::internal::Isolate::Throw(v8::internal::Object*, v8::internal::MessageLocation*) [/Users/davidcarvajal/.nvm/versions/node/v8.12.0/bin/node]
+ 2: [pc=0x10076d77b] v8::internal::Runtime_Throw(int, v8::internal::Object**, v8::internal::Isolate*) [/Users/davidcarvajal/.nvm/versions/node/v8.12.0/bin/node]
+ 3: [pc=0xd07202842fd] 
+ 4: [pc=0xd0720387a7a] 
+ 5: [pc=0xd072033d1d6] 
+ 6: [pc=0xd072028535f] 
+ 7: [pc=0xd072033d1d6] 
+
+================================================================================
+==== JavaScript Heap and Garbage Collector =====================================
+
+Heap space name: new_space
+    Memory size: 16,777,216 bytes, committed memory: 16,735,240 bytes
+    Capacity: 8,249,344 bytes, used: 8,164,304 bytes, available: 85,040 bytes
+Heap space name: old_space
+    Memory size: 18,149,376 bytes, committed memory: 16,384,224 bytes
+    Capacity: 16,399,352 bytes, used: 16,078,664 bytes, available: 320,688 bytes
+Heap space name: code_space
+    Memory size: 2,097,152 bytes, committed memory: 1,389,184 bytes
+    Capacity: 1,323,648 bytes, used: 1,323,648 bytes, available: 0 bytes
+Heap space name: map_space
+    Memory size: 1,593,344 bytes, committed memory: 1,259,248 bytes
+    Capacity: 1,543,496 bytes, used: 1,224,432 bytes, available: 319,064 bytes
+Heap space name: large_object_space
+    Memory size: 2,928,640 bytes, committed memory: 2,928,640 bytes
+    Capacity: 1,460,782,240 bytes, used: 2,872,992 bytes, available: 1,457,909,248 bytes
+
+Total heap memory size: 41,545,728 bytes
+Total heap committed memory: 38,696,536 bytes
+Total used heap memory: 29,664,040 bytes
+Total available heap memory: 1,458,634,040 bytes
+
+Heap memory limit: 1,501,560,832
+
+================================================================================
+==== Resource Usage ============================================================
+
+Process total resource usage:
+  User mode CPU: 0.798213 secs
+  Kernel mode CPU: 0.111338 secs
+  Average CPU Consumption : 90.9551%
+  Maximum resident set size: 61,060,677,632 bytes
+  Page faults: 12 (I/O required) 16953 (no I/O required)
+  Filesystem activity: 0 reads 0 writes
+
+================================================================================
+==== Node.js libuv Handle Summary ==============================================
+
+(Flags: R=Ref, A=Active)
+Flags  Type      Address             Details
+[-A]   async     0x0000000102601290  
+[--]   check     0x00007ffeefbfe808  
+[R-]   idle      0x00007ffeefbfe880  
+[--]   prepare   0x00007ffeefbfe8f8  
+[--]   check     0x00007ffeefbfe970  
+[-A]   async     0x000000010155da60  
+[-A]   async     0x00000001024042d0  
+[-A]   async     0x0000000102402370  
+[R-]   timer     0x00000001024044d0  repeat: 0, timeout expired: 8070741 ms ago
+[R-]   tty       0x0000000102401f28  width: 78, height: 43, file descriptor: 10, write queue size: 0, writable
+[-A]   signal    0x0000000102606b00  signum: 28 (SIGWINCH)
+[R-]   tty       0x0000000102606e68  width: 78, height: 43, file descriptor: 12, write queue size: 0, writable
+[-A]   async     0x0000000102607cd0  
+[-A]   async     0x0000000102401a70  
+[-A]   async     0x0000000102400d50  
+[-A]   async     0x00000001026065d0  
+[-A]   async     0x000000010241d0b0  
+[-A]   async     0x0000000102607bf0  
+[-A]   async     0x0000000102607d50  
+[-A]   async     0x0000000102401370  
+[-A]   async     0x0000000102402280  
+[-A]   async     0x00000001022daf68  
+
+================================================================================
+==== System Information ========================================================
+
+Environment variables
+  TERM_SESSION_ID=w0t0p1:07B6D0AE-DA85-4367-A4AE-7D988315E124
+  SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.8tEkRFt6cq/Listeners
+  Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.G8kAvAF0j0/Render
+  COLORFGBG=12;8
+  ITERM_PROFILE=Default
+  XPC_FLAGS=0x0
+  PWD=/Users/davidcarvajal/Google Drive/Blockchain/Composer-root/agrotracker-network
+  SHELL=/bin/zsh
+  TERM_PROGRAM_VERSION=3.2.9
+  TERM_PROGRAM=iTerm.app
+  PATH=/Users/davidcarvajal/Downloads/google-cloud-sdk/bin:/Users/davidcarvajal/.nvm/versions/node/v8.12.0/bin:/Users/davidcarvajal/.npm-global/lib/node_modules:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin
+  DISPLAY=/private/tmp/com.apple.launchd.EQxA8Np2UG/org.macosforge.xquartz:0
+  COLORTERM=truecolor
+  TERM=xterm-256color
+  HOME=/Users/davidcarvajal
+  TMPDIR=/var/folders/0z/99ywxc910qb0lsv5tjt7r81w0000gn/T/
+  USER=davidcarvajal
+  XPC_SERVICE_NAME=0
+  LOGNAME=davidcarvajal
+  __CF_USER_TEXT_ENCODING=0x1F5:0x0:0x0
+  ITERM_SESSION_ID=w0t0p1:07B6D0AE-DA85-4367-A4AE-7D988315E124
+  SHLVL=1
+  OLDPWD=/Users/davidcarvajal
+  ZSH=/Users/davidcarvajal/.oh-my-zsh
+  NVM_DIR=/Users/davidcarvajal/.nvm
+  NVM_CD_FLAGS=-q
+  NVM_BIN=/Users/davidcarvajal/.nvm/versions/node/v8.12.0/bin
+  PAGER=less
+  LESS=-R
+  LSCOLORS=Gxfxcxdxbxegedabagacad
+  LC_CTYPE=UTF-8
+  SSH_KEY_PATH=~/.ssh/rsa_id
+  _=/Users/davidcarvajal/.nvm/versions/node/v8.12.0/bin/composer
+
+Resource limits                        soft limit      hard limit
+  core file size (blocks)                       0       unlimited
+  data seg size (kbytes)                unlimited       unlimited
+  file size (blocks)                    unlimited       unlimited
+  max locked memory (bytes)             unlimited       unlimited
+  max memory size (kbytes)              unlimited       unlimited
+  open files                                10240       unlimited
+  stack size (bytes)                      8388608        67104768
+  cpu time (seconds)                    unlimited       unlimited
+  max user processes                          709            1064
+  virtual memory (kbytes)               unlimited       unlimited
+
+Loaded libraries
+  /Users/davidcarvajal/.nvm/versions/node/v8.12.0/bin/node
+  /System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+  /usr/lib/libSystem.B.dylib
+  /usr/lib/libc++.1.dylib
+  /usr/lib/libobjc.A.dylib
+  /usr/lib/libDiagnosticMessagesClient.dylib
+  /usr/lib/libicucore.A.dylib
+  /usr/lib/libz.1.dylib
+  /usr/lib/libc++abi.dylib
+  /usr/lib/system/libcache.dylib
+  /usr/lib/system/libcommonCrypto.dylib
+  /usr/lib/system/libcompiler_rt.dylib
+  /usr/lib/system/libcopyfile.dylib
+  /usr/lib/system/libcorecrypto.dylib
+  /usr/lib/system/libdispatch.dylib
+  /usr/lib/system/libdyld.dylib
+  /usr/lib/system/libkeymgr.dylib
+  /usr/lib/system/liblaunch.dylib
+  /usr/lib/system/libmacho.dylib
+  /usr/lib/system/libquarantine.dylib
+  /usr/lib/system/libremovefile.dylib
+  /usr/lib/system/libsystem_asl.dylib
+  /usr/lib/system/libsystem_blocks.dylib
+  /usr/lib/system/libsystem_c.dylib
+  /usr/lib/system/libsystem_configuration.dylib
+  /usr/lib/system/libsystem_coreservices.dylib
+  /usr/lib/system/libsystem_darwin.dylib
+  /usr/lib/system/libsystem_dnssd.dylib
+  /usr/lib/system/libsystem_info.dylib
+  /usr/lib/system/libsystem_m.dylib
+  /usr/lib/system/libsystem_malloc.dylib
+  /usr/lib/system/libsystem_networkextension.dylib
+  /usr/lib/system/libsystem_notify.dylib
+  /usr/lib/system/libsystem_sandbox.dylib
+  /usr/lib/system/libsystem_secinit.dylib
+  /usr/lib/system/libsystem_kernel.dylib
+  /usr/lib/system/libsystem_platform.dylib
+  /usr/lib/system/libsystem_pthread.dylib
+  /usr/lib/system/libsystem_symptoms.dylib
+  /usr/lib/system/libsystem_trace.dylib
+  /usr/lib/system/libunwind.dylib
+  /usr/lib/system/libxpc.dylib
+  /Users/davidcarvajal/.nvm/versions/node/v8.12.0/lib/node_modules/composer-cli/node_modules/node-report/api.node
+
+================================================================================

@@ -173,7 +173,7 @@ export default {
   methods:{
     renderChart () {
 
-        
+      // console.log(this.data);
       const chartMeta = this.sensorChart.getDatasetMeta(0);
       chartMeta.data[0]._model.radius = 0;
       chartMeta.data[this.chartData.datasets[0].data.length - 1]._model.radius = 0;

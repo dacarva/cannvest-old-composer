@@ -66,10 +66,10 @@ export default {
         return require('@/assets/images/logos/hyperledger.png');
       }
       else if (assetType === 'Producer') {
-        return require('@/assets/images/logos/hyperledger.png');
+        return require('@/assets/images/logos/agrotracker-producer.png');
       }
       else if (assetType === 'Consumer') {
-        return require('@/assets/images/logos/hyperledger.png');
+        return require('@/assets/images/logos/agrotracker-consumer.png');
       }
       return require('@/assets/images/logos/hyperledger.png');
     },

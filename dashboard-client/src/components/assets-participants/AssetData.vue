@@ -83,7 +83,7 @@ export default {
     }
   },
   computed: {
-    //NOTA:WE HAVE TO ENSURE THAT WE HAVE DATA IN THE BLOCKCHAIN TO SHOW THE MODULE
+    //NOTE:WE HAVE TO ENSURE THAT WE HAVE DATA IN THE BLOCKCHAIN TO SHOW THE MODULE
     temperatureReadings: function () {
       return this.asset.temperatureReadings.map(a => a.temperature);
     },

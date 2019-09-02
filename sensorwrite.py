@@ -49,9 +49,9 @@ lot_4 = {
   "contract": "resource:org.agrotracker.network.Contract#CON-001"
 }
 
-# post_data(base_url + 'ProductLot', lot_2)
-# post_data(base_url + 'ProductLot', lot_3)
-# post_data(base_url + 'ProductLot', lot_4)
+post_data(base_url + 'ProductLot', lot_2)
+post_data(base_url + 'ProductLot', lot_3)
+post_data(base_url + 'ProductLot', lot_4)
 
 
 while True:
@@ -66,7 +66,7 @@ while True:
   ipfs = 'Qmxx' + str(random.randint(1,100))
   note = 'ABC' + str(random.randint(1,100))
   
-  for lot in range(1,2):
+  for lot in range(1,5):
     print("Cycle started for LOT-00" + str(lot) )
 
     #Get dummy sensor data
@@ -125,4 +125,4 @@ while True:
 
 
   #Sleep for 5 minutes
-  #time.sleep(20)
+  # time.sleep(20)

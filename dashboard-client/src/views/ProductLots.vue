@@ -49,15 +49,15 @@
             if (lot.lotId === this.selectedLotId){
               this.selectedLot = lot;
             }
+            this.forceRerender();
           } 
         }
         else {
           axios.get(this.$hyperledgerApiUrl + 'ProductLot/' + this.selectedLotId).then(response => {
             this.selectedLot = response.data;
+            this.forceRerender(); // It is necessary to render from here in order to ensure that the data has arrived
           });
-          console.log(this.selectedLot)
         }
-        this.forceRerender();
       },
       forceRerender () {
         this.componentKey += 1;
